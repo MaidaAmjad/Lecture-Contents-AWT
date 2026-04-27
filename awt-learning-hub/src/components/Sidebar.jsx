@@ -2,15 +2,11 @@ import { Link, useParams } from 'react-router-dom';
 import { lectures } from '../data/lectures';
 
 const LECTURE_TITLES = {
-  9: "Error Handling",
-  6: "Authentication & JWT",
+  8: "MongoDB & Mongoose",
   9: "Error Handling",
   10: "File Uploads",
   11: "WebSockets",
   12: "GraphQL Basics",
-  13: "Deployment",
-  14: "Testing APIs",
-  15: "Project & Review",
 };
 
 const ALL_LECTURES = Array.from({ length: 15 }, (_, i) => {

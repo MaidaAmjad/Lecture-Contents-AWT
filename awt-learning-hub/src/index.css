@@ -577,8 +577,8 @@ tr:hover td { background: #f0f1ff; }
 
 /* Code block */
 .code-block {
-  background: #1e293b;
-  color: #e2e8f0;
+  background: #f8fafc;
+  color: #1e293b;
   border-radius: var(--radius-sm);
   padding: 16px;
   font-family: 'Cascadia Code', 'Fira Code', 'Consolas', monospace;
@@ -587,6 +587,8 @@ tr:hover td { background: #f0f1ff; }
   overflow-x: auto;
   margin: 10px 0;
   white-space: pre;
+  border: 1px solid #e2e8f0;
+  border-left: 3px solid var(--primary-light);
 }
 
 /* Quiz section */
@@ -847,4 +849,368 @@ tr:hover td { background: #f0f1ff; }
 .quiz-section[data-color="teal"] .quiz-question:hover {
   background: var(--color-teal-bg) !important;
   color: var(--color-teal) !important;
+}
+
+/* ── Indigo color theme (Lecture 7) ── */
+:root {
+  --color-indigo: #4338ca;
+  --color-indigo-bg: #eef2ff;
+  --color-indigo-border: #c7d2fe;
+  --color-rose: #e11d48;
+  --color-rose-bg: #fff1f2;
+  --color-rose-border: #fecdd3;
+  --color-violet: #7c3aed;
+  --color-violet-bg: #f5f3ff;
+  --color-violet-border: #ddd6fe;
+  --color-cyan: #0891b2;
+  --color-cyan-bg: #ecfeff;
+  --color-cyan-border: #a5f3fc;
+  --color-amber: #b45309;
+  --color-amber-bg: #fffbeb;
+  --color-amber-border: #fde68a;
+  --color-emerald: #059669;
+  --color-emerald-bg: #ecfdf5;
+  --color-emerald-border: #a7f3d0;
+}
+
+.lecture-section[data-color="indigo"] {
+  border-color: var(--color-indigo-border);
+  background: var(--color-indigo-bg);
+}
+.lecture-section[data-color="indigo"] .section-heading {
+  color: var(--color-indigo);
+  border-bottom-color: var(--color-indigo-border);
+}
+.lecture-section[data-color="indigo"] .content-list li::before { color: var(--color-indigo); }
+.lecture-section[data-color="indigo"] .subsection { border-color: var(--color-indigo-border); background: white; }
+.lecture-section[data-color="indigo"] .subsection-title { color: var(--color-indigo); }
+.lecture-section[data-color="indigo"] .subsection:hover { border-color: var(--color-indigo) !important; transform: translateX(4px) !important; }
+.lecture-section[data-color="indigo"] th { background: var(--color-indigo); }
+.lecture-section[data-color="indigo"]:hover { box-shadow: 0 6px 24px rgba(67,56,202,0.14) !important; }
+
+/* ── Indigo card accent ── */
+.lecture-card[data-color="indigo"]::before {
+  background: linear-gradient(90deg, var(--color-indigo), #818cf8);
+}
+.lecture-card[data-color="indigo"] .card-num { color: var(--color-indigo); }
+.lecture-card[data-color="indigo"]:hover {
+  border-color: var(--color-indigo-border) !important;
+  box-shadow: 0 16px 48px rgba(67,56,202,0.22), 0 4px 12px rgba(0,0,0,0.08) !important;
+}
+
+/* ── Rose color theme (Lecture 8) ── */
+.lecture-section[data-color="rose"] {
+  border-color: var(--color-rose-border);
+  background: var(--color-rose-bg);
+}
+.lecture-section[data-color="rose"] .section-heading {
+  color: var(--color-rose);
+  border-bottom-color: var(--color-rose-border);
+}
+.lecture-section[data-color="rose"] .content-list li::before { color: var(--color-rose); }
+.lecture-section[data-color="rose"] .subsection { border-color: var(--color-rose-border); background: white; }
+.lecture-section[data-color="rose"] .subsection-title { color: var(--color-rose); }
+.lecture-section[data-color="rose"] .subsection:hover { border-color: var(--color-rose) !important; transform: translateX(4px) !important; }
+.lecture-section[data-color="rose"] th { background: var(--color-rose); }
+.lecture-section[data-color="rose"]:hover { box-shadow: 0 6px 24px rgba(225,29,72,0.14) !important; }
+
+/* ── Rose card accent ── */
+.lecture-card[data-color="rose"]::before {
+  background: linear-gradient(90deg, var(--color-rose), #fb7185);
+}
+.lecture-card[data-color="rose"] .card-num { color: var(--color-rose); }
+.lecture-card[data-color="rose"]:hover {
+  border-color: var(--color-rose-border) !important;
+  box-shadow: 0 16px 48px rgba(225,29,72,0.22), 0 4px 12px rgba(0,0,0,0.08) !important;
+}
+
+/* ── Rose quiz section accent ── */
+.quiz-section[data-color="rose"] {
+  border-color: var(--color-rose-border);
+}
+.quiz-section[data-color="rose"] .quiz-title { color: var(--color-rose); }
+.quiz-section[data-color="rose"] .quiz-item:hover { border-color: var(--color-rose) !important; }
+.quiz-section[data-color="rose"] .quiz-question:hover {
+  background: var(--color-rose-bg) !important;
+  color: var(--color-rose) !important;
+}
+
+/* ── Violet color theme (Lecture 9) ── */
+.lecture-section[data-color="violet"] {
+  border-color: var(--color-violet-border);
+  background: var(--color-violet-bg);
+}
+.lecture-section[data-color="violet"] .section-heading {
+  color: var(--color-violet);
+  border-bottom-color: var(--color-violet-border);
+}
+.lecture-section[data-color="violet"] .content-list li::before { color: var(--color-violet); }
+.lecture-section[data-color="violet"] .subsection { border-color: var(--color-violet-border); background: white; }
+.lecture-section[data-color="violet"] .subsection-title { color: var(--color-violet); }
+.lecture-section[data-color="violet"] .subsection:hover { border-color: var(--color-violet) !important; transform: translateX(4px) !important; }
+.lecture-section[data-color="violet"] th { background: var(--color-violet); }
+.lecture-section[data-color="violet"]:hover { box-shadow: 0 6px 24px rgba(124,58,237,0.14) !important; }
+
+.lecture-card[data-color="violet"]::before {
+  background: linear-gradient(90deg, var(--color-violet), #a78bfa);
+}
+.lecture-card[data-color="violet"] .card-num { color: var(--color-violet); }
+.lecture-card[data-color="violet"]:hover {
+  border-color: var(--color-violet-border) !important;
+  box-shadow: 0 16px 48px rgba(124,58,237,0.22), 0 4px 12px rgba(0,0,0,0.08) !important;
+}
+
+.quiz-section[data-color="violet"] {
+  border-color: var(--color-violet-border);
+}
+.quiz-section[data-color="violet"] .quiz-title { color: var(--color-violet); }
+.quiz-section[data-color="violet"] .quiz-item:hover { border-color: var(--color-violet) !important; }
+.quiz-section[data-color="violet"] .quiz-question:hover {
+  background: var(--color-violet-bg) !important;
+  color: var(--color-violet) !important;
+}
+
+/* ── Cyan color theme (Lecture 10) ── */
+.lecture-section[data-color="cyan"] {
+  border-color: var(--color-cyan-border);
+  background: var(--color-cyan-bg);
+}
+.lecture-section[data-color="cyan"] .section-heading {
+  color: var(--color-cyan);
+  border-bottom-color: var(--color-cyan-border);
+}
+.lecture-section[data-color="cyan"] .content-list li::before { color: var(--color-cyan); }
+.lecture-section[data-color="cyan"] .subsection { border-color: var(--color-cyan-border); background: white; }
+.lecture-section[data-color="cyan"] .subsection-title { color: var(--color-cyan); }
+.lecture-section[data-color="cyan"] .subsection:hover { border-color: var(--color-cyan) !important; transform: translateX(4px) !important; }
+.lecture-section[data-color="cyan"] th { background: var(--color-cyan); }
+.lecture-section[data-color="cyan"]:hover { box-shadow: 0 6px 24px rgba(8,145,178,0.14) !important; }
+
+.lecture-card[data-color="cyan"]::before {
+  background: linear-gradient(90deg, var(--color-cyan), #22d3ee);
+}
+.lecture-card[data-color="cyan"] .card-num { color: var(--color-cyan); }
+.lecture-card[data-color="cyan"]:hover {
+  border-color: var(--color-cyan-border) !important;
+  box-shadow: 0 16px 48px rgba(8,145,178,0.22), 0 4px 12px rgba(0,0,0,0.08) !important;
+}
+
+.quiz-section[data-color="cyan"] {
+  border-color: var(--color-cyan-border);
+}
+.quiz-section[data-color="cyan"] .quiz-title { color: var(--color-cyan); }
+.quiz-section[data-color="cyan"] .quiz-item:hover { border-color: var(--color-cyan) !important; }
+.quiz-section[data-color="cyan"] .quiz-question:hover {
+  background: var(--color-cyan-bg) !important;
+  color: var(--color-cyan) !important;
+}
+
+/* ── Emerald color theme (Lecture 12) ── */
+.lecture-section[data-color="emerald"] {
+  border-color: var(--color-emerald-border);
+  background: var(--color-emerald-bg);
+}
+.lecture-section[data-color="emerald"] .section-heading {
+  color: var(--color-emerald);
+  border-bottom-color: var(--color-emerald-border);
+}
+.lecture-section[data-color="emerald"] .content-list li::before { color: var(--color-emerald); }
+.lecture-section[data-color="emerald"] .subsection { border-color: var(--color-emerald-border); background: white; }
+.lecture-section[data-color="emerald"] .subsection-title { color: var(--color-emerald); }
+.lecture-section[data-color="emerald"] .subsection:hover { border-color: var(--color-emerald) !important; transform: translateX(4px) !important; }
+.lecture-section[data-color="emerald"] th { background: var(--color-emerald); }
+.lecture-section[data-color="emerald"]:hover { box-shadow: 0 6px 24px rgba(5,150,105,0.14) !important; }
+
+.lecture-card[data-color="emerald"]::before {
+  background: linear-gradient(90deg, var(--color-emerald), #34d399);
+}
+.lecture-card[data-color="emerald"] .card-num { color: var(--color-emerald); }
+.lecture-card[data-color="emerald"]:hover {
+  border-color: var(--color-emerald-border) !important;
+  box-shadow: 0 16px 48px rgba(5,150,105,0.22), 0 4px 12px rgba(0,0,0,0.08) !important;
+}
+
+.quiz-section[data-color="emerald"] {
+  border-color: var(--color-emerald-border);
+}
+.quiz-section[data-color="emerald"] .quiz-title { color: var(--color-emerald); }
+.quiz-section[data-color="emerald"] .quiz-item:hover { border-color: var(--color-emerald) !important; }
+.quiz-section[data-color="emerald"] .quiz-question:hover {
+  background: var(--color-emerald-bg) !important;
+  color: var(--color-emerald) !important;
+}
+
+/* ── Colorful card gradient accents for all lectures ── */
+.lecture-card:nth-child(1)::before  { background: linear-gradient(90deg, #6366f1, #818cf8); }
+.lecture-card:nth-child(2)::before  { background: linear-gradient(90deg, #0ea5e9, #38bdf8); }
+.lecture-card:nth-child(3)::before  { background: linear-gradient(90deg, #10b981, #34d399); }
+.lecture-card:nth-child(4)::before  { background: linear-gradient(90deg, #f59e0b, #fbbf24); }
+.lecture-card:nth-child(5)::before  { background: linear-gradient(90deg, #8b5cf6, #a78bfa); }
+.lecture-card:nth-child(6)::before  { background: linear-gradient(90deg, #0d9488, #2dd4bf); }
+.lecture-card:nth-child(7)::before  { background: linear-gradient(90deg, #4338ca, #818cf8); }
+.lecture-card:nth-child(8)::before  { background: linear-gradient(90deg, #db2777, #f472b6); }
+.lecture-card:nth-child(9)::before  { background: linear-gradient(90deg, #d97706, #fbbf24); }
+.lecture-card:nth-child(10)::before { background: linear-gradient(90deg, #059669, #34d399); }
+.lecture-card:nth-child(11)::before { background: linear-gradient(90deg, #7c3aed, #c084fc); }
+.lecture-card:nth-child(12)::before { background: linear-gradient(90deg, #2563eb, #60a5fa); }
+.lecture-card:nth-child(13)::before { background: linear-gradient(90deg, #dc2626, #f87171); }
+.lecture-card:nth-child(14)::before { background: linear-gradient(90deg, #0891b2, #22d3ee); }
+.lecture-card:nth-child(15)::before { background: linear-gradient(90deg, #16a34a, #4ade80); }
+
+/* ── Colorful card hover glow matching top bar ── */
+.lecture-card:nth-child(1):hover  { box-shadow: 0 16px 48px rgba(99,102,241,0.25),  0 4px 12px rgba(0,0,0,0.08) !important; }
+.lecture-card:nth-child(2):hover  { box-shadow: 0 16px 48px rgba(14,165,233,0.25),  0 4px 12px rgba(0,0,0,0.08) !important; }
+.lecture-card:nth-child(3):hover  { box-shadow: 0 16px 48px rgba(16,185,129,0.25),  0 4px 12px rgba(0,0,0,0.08) !important; }
+.lecture-card:nth-child(4):hover  { box-shadow: 0 16px 48px rgba(245,158,11,0.25),  0 4px 12px rgba(0,0,0,0.08) !important; }
+.lecture-card:nth-child(5):hover  { box-shadow: 0 16px 48px rgba(139,92,246,0.25),  0 4px 12px rgba(0,0,0,0.08) !important; }
+.lecture-card:nth-child(6):hover  { box-shadow: 0 16px 48px rgba(13,148,136,0.25),  0 4px 12px rgba(0,0,0,0.08) !important; }
+.lecture-card:nth-child(7):hover  { box-shadow: 0 16px 48px rgba(67,56,202,0.25),   0 4px 12px rgba(0,0,0,0.08) !important; }
+.lecture-card:nth-child(8):hover  { box-shadow: 0 16px 48px rgba(219,39,119,0.25),  0 4px 12px rgba(0,0,0,0.08) !important; }
+.lecture-card:nth-child(9):hover  { box-shadow: 0 16px 48px rgba(217,119,6,0.25),   0 4px 12px rgba(0,0,0,0.08) !important; }
+.lecture-card:nth-child(10):hover { box-shadow: 0 16px 48px rgba(5,150,105,0.25),   0 4px 12px rgba(0,0,0,0.08) !important; }
+.lecture-card:nth-child(11):hover { box-shadow: 0 16px 48px rgba(124,58,237,0.25),  0 4px 12px rgba(0,0,0,0.08) !important; }
+.lecture-card:nth-child(12):hover { box-shadow: 0 16px 48px rgba(37,99,235,0.25),   0 4px 12px rgba(0,0,0,0.08) !important; }
+.lecture-card:nth-child(13):hover { box-shadow: 0 16px 48px rgba(220,38,38,0.25),   0 4px 12px rgba(0,0,0,0.08) !important; }
+.lecture-card:nth-child(14):hover { box-shadow: 0 16px 48px rgba(8,145,178,0.25),   0 4px 12px rgba(0,0,0,0.08) !important; }
+.lecture-card:nth-child(15):hover { box-shadow: 0 16px 48px rgba(22,163,74,0.25),   0 4px 12px rgba(0,0,0,0.08) !important; }
+
+/* ── Teal section color theme (Lectures 13+) ── */
+.lecture-section[data-color="teal"] {
+  border-color: var(--color-teal-border);
+  background: var(--color-teal-bg);
+}
+.lecture-section[data-color="teal"] .section-heading {
+  color: var(--color-teal);
+  border-bottom-color: var(--color-teal-border);
+}
+.lecture-section[data-color="teal"] .content-list li::before { color: var(--color-teal); }
+.lecture-section[data-color="teal"] .subsection { border-color: var(--color-teal-border); background: white; }
+.lecture-section[data-color="teal"] .subsection-title { color: var(--color-teal); }
+.lecture-section[data-color="teal"] .subsection:hover { border-color: var(--color-teal) !important; transform: translateX(4px) !important; }
+.lecture-section[data-color="teal"] th { background: var(--color-teal); }
+.lecture-section[data-color="teal"]:hover { box-shadow: 0 6px 24px rgba(13,148,136,0.14) !important; }
+
+/* ── Quiz section accent — rose (Lecture 13) ── */
+.quiz-section[data-color="rose"] {
+  border-color: var(--color-rose-border);
+}
+.quiz-section[data-color="rose"] .quiz-title { color: var(--color-rose); }
+.quiz-section[data-color="rose"] .quiz-item:hover { border-color: var(--color-rose) !important; }
+.quiz-section[data-color="rose"] .quiz-question:hover {
+  background: var(--color-rose-bg) !important;
+  color: var(--color-rose) !important;
+}
+
+/* ── Quiz section accent — cyan (Lecture 14) ── */
+.quiz-section[data-color="cyan"] {
+  border-color: var(--color-cyan-border);
+}
+.quiz-section[data-color="cyan"] .quiz-title { color: var(--color-cyan); }
+.quiz-section[data-color="cyan"] .quiz-item:hover { border-color: var(--color-cyan) !important; }
+.quiz-section[data-color="cyan"] .quiz-question:hover {
+  background: var(--color-cyan-bg) !important;
+  color: var(--color-cyan) !important;
+}
+
+/* ── Quiz section accent — emerald (Lecture 15) ── */
+.quiz-section[data-color="emerald"] {
+  border-color: var(--color-emerald-border);
+}
+.quiz-section[data-color="emerald"] .quiz-title { color: var(--color-emerald); }
+.quiz-section[data-color="emerald"] .quiz-item:hover { border-color: var(--color-emerald) !important; }
+.quiz-section[data-color="emerald"] .quiz-question:hover {
+  background: var(--color-emerald-bg) !important;
+  color: var(--color-emerald) !important;
+}
+
+/* ── Amber color theme (Lecture 4) ── */
+.lecture-section[data-color="amber"] {
+  border-color: var(--color-amber-border);
+  background: var(--color-amber-bg);
+}
+.lecture-section[data-color="amber"] .section-heading {
+  color: var(--color-amber);
+  border-bottom-color: var(--color-amber-border);
+}
+.lecture-section[data-color="amber"] .content-list li::before { color: var(--color-amber); }
+.lecture-section[data-color="amber"] .subsection { border-color: var(--color-amber-border); background: white; }
+.lecture-section[data-color="amber"] .subsection-title { color: var(--color-amber); }
+.lecture-section[data-color="amber"] .subsection:hover { border-color: var(--color-amber) !important; transform: translateX(4px) !important; }
+.lecture-section[data-color="amber"] th { background: var(--color-amber); }
+.lecture-section[data-color="amber"]:hover { box-shadow: 0 6px 24px rgba(180,83,9,0.14) !important; }
+
+.lecture-card[data-color="amber"]::before {
+  background: linear-gradient(90deg, var(--color-amber), #fbbf24);
+}
+.lecture-card[data-color="amber"] .card-num { color: var(--color-amber); }
+.lecture-card[data-color="amber"]:hover {
+  border-color: var(--color-amber-border) !important;
+  box-shadow: 0 16px 48px rgba(180,83,9,0.22), 0 4px 12px rgba(0,0,0,0.08) !important;
+}
+
+.quiz-section[data-color="amber"] {
+  border-color: var(--color-amber-border);
+}
+.quiz-section[data-color="amber"] .quiz-title { color: var(--color-amber); }
+.quiz-section[data-color="amber"] .quiz-item:hover { border-color: var(--color-amber) !important; }
+.quiz-section[data-color="amber"] .quiz-question:hover {
+  background: var(--color-amber-bg) !important;
+  color: var(--color-amber) !important;
+}
+
+/* ── Blue card accent (Lecture 1) ── */
+.lecture-card[data-color="blue"]::before {
+  background: linear-gradient(90deg, var(--color-blue), #60a5fa);
+}
+.lecture-card[data-color="blue"] .card-num { color: var(--color-blue); }
+.lecture-card[data-color="blue"]:hover {
+  border-color: var(--color-blue-border) !important;
+  box-shadow: 0 16px 48px rgba(37,99,235,0.22), 0 4px 12px rgba(0,0,0,0.08) !important;
+}
+.quiz-section[data-color="blue"] {
+  border-color: var(--color-blue-border);
+}
+.quiz-section[data-color="blue"] .quiz-title { color: var(--color-blue); }
+.quiz-section[data-color="blue"] .quiz-item:hover { border-color: var(--color-blue) !important; }
+.quiz-section[data-color="blue"] .quiz-question:hover {
+  background: var(--color-blue-bg) !important;
+  color: var(--color-blue) !important;
+}
+
+/* ── Green card accent (Lecture 2) ── */
+.lecture-card[data-color="green"]::before {
+  background: linear-gradient(90deg, var(--color-green), #34d399);
+}
+.lecture-card[data-color="green"] .card-num { color: var(--color-green); }
+.lecture-card[data-color="green"]:hover {
+  border-color: var(--color-green-border) !important;
+  box-shadow: 0 16px 48px rgba(5,150,105,0.22), 0 4px 12px rgba(0,0,0,0.08) !important;
+}
+.quiz-section[data-color="green"] {
+  border-color: var(--color-green-border);
+}
+.quiz-section[data-color="green"] .quiz-title { color: var(--color-green); }
+.quiz-section[data-color="green"] .quiz-item:hover { border-color: var(--color-green) !important; }
+.quiz-section[data-color="green"] .quiz-question:hover {
+  background: var(--color-green-bg) !important;
+  color: var(--color-green) !important;
+}
+
+/* ── Orange card accent (Lecture 3) ── */
+.lecture-card[data-color="orange"]::before {
+  background: linear-gradient(90deg, var(--color-orange), #fbbf24);
+}
+.lecture-card[data-color="orange"] .card-num { color: var(--color-orange); }
+.lecture-card[data-color="orange"]:hover {
+  border-color: var(--color-orange-border) !important;
+  box-shadow: 0 16px 48px rgba(217,119,6,0.22), 0 4px 12px rgba(0,0,0,0.08) !important;
+}
+.quiz-section[data-color="orange"] {
+  border-color: var(--color-orange-border);
+}
+.quiz-section[data-color="orange"] .quiz-title { color: var(--color-orange); }
+.quiz-section[data-color="orange"] .quiz-item:hover { border-color: var(--color-orange) !important; }
+.quiz-section[data-color="orange"] .quiz-question:hover {
+  background: var(--color-orange-bg) !important;
+  color: var(--color-orange) !important;
 }
