@@ -1903,3 +1903,193 @@ tr:hover td { background: #f0f1ff; }
   .team-lead-col,
   .team-juniors-col { padding: 20px; }
 }
+
+/* ════════════════════════════════════════
+   MOBILE RESPONSIVE — COMPREHENSIVE
+   ════════════════════════════════════════ */
+
+/* ── Base mobile meta ── */
+html { -webkit-text-size-adjust: 100%; }
+
+/* ── Topbar mobile improvements ── */
+@media (max-width: 768px) {
+  .topbar {
+    padding: 12px 16px;
+    gap: 10px;
+  }
+  .topbar-title {
+    font-size: 0.88rem;
+    flex: 1;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .menu-btn {
+    font-size: 1.2rem;
+    padding: 4px 8px;
+    border-radius: 6px;
+    background: var(--secondary);
+    flex-shrink: 0;
+  }
+}
+
+/* ── Sidebar mobile ── */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 88vw;
+    max-width: 300px;
+    box-shadow: 4px 0 24px rgba(0,0,0,0.15);
+  }
+  .sidebar-header { padding: 20px 16px 14px; }
+  .sidebar-logo { font-size: 1.1rem; }
+  .sidebar-dashboard-btn { font-size: 0.74rem; padding: 6px 12px; }
+  .nav-item { padding: 10px 16px; }
+  .nav-text { font-size: 0.82rem; }
+}
+
+/* ── Dashboard page ── */
+@media (max-width: 768px) {
+  .dashboard-page { padding: 12px 14px 40px; }
+
+  /* Quote banner */
+  .quote-banner { padding: 14px 14px; gap: 10px; }
+  .quote-icon { font-size: 2rem; }
+  .quote-text { font-size: 0.88rem; }
+  .quote-refresh { width: 30px; height: 30px; font-size: 1rem; }
+
+  /* Hero */
+  .dash-hero { padding: 20px 18px; gap: 16px; }
+  .dash-hero-text h1 { font-size: 1.2rem; }
+  .dash-hero-text p { font-size: 0.85rem; margin-bottom: 14px; }
+  .dash-cta-btn { font-size: 0.82rem; padding: 9px 16px; }
+
+  /* Stats */
+  .dash-stats { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .dash-stat-card { padding: 14px 14px; gap: 10px; }
+  .dash-stat-icon { font-size: 1.4rem; }
+  .dash-stat-value { font-size: 1.3rem; }
+  .dash-stat-label { font-size: 0.72rem; }
+
+  /* Two col panels */
+  .dash-two-col { gap: 12px; }
+  .dash-panel { padding: 16px; }
+  .dash-next-card { padding: 14px; }
+  .dash-next-title { font-size: 0.88rem; }
+  .dash-next-desc { font-size: 0.76rem; }
+  .dash-next-arrow { font-size: 1rem; right: 12px; }
+
+  /* Section header */
+  .dash-section-header { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .dash-progress-inline { font-size: 0.75rem; }
+
+  /* Lecture cards */
+  .lectures-grid { grid-template-columns: 1fr; gap: 12px; }
+  .lecture-card { padding: 16px; }
+  .card-title { font-size: 0.92rem; }
+  .card-desc { font-size: 0.78rem; }
+}
+
+@media (max-width: 400px) {
+  .dash-stats { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .dash-stat-card { padding: 12px 10px; }
+  .dash-stat-value { font-size: 1.15rem; }
+}
+
+/* ── Lecture page mobile ── */
+@media (max-width: 768px) {
+  .lecture-page { padding: 16px 14px 32px; max-width: 100%; }
+  .lecture-title { font-size: 1.25rem; line-height: 1.3; }
+  .lecture-meta-row { gap: 6px; flex-wrap: wrap; }
+  .complete-btn { width: 100%; text-align: center; padding: 11px; font-size: 0.85rem; }
+  .lecture-nav-btns { gap: 8px; }
+  .nav-btn { padding: 9px 14px; font-size: 0.82rem; flex: 1; justify-content: center; }
+
+  /* Sections */
+  .lecture-section { padding: 16px 14px; margin-bottom: 14px; }
+  .section-heading { font-size: 1rem; }
+  .content-list li { font-size: 0.86rem; }
+  .subsection { padding: 12px; }
+  .subsection-title { font-size: 0.88rem; }
+
+  /* Code blocks — horizontal scroll */
+  .code-block {
+    font-size: 0.76rem;
+    padding: 12px;
+    border-radius: 6px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    white-space: pre;
+    max-width: 100%;
+  }
+
+  /* Tables — horizontal scroll */
+  .table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 6px;
+  }
+  table { min-width: 420px; font-size: 0.8rem; }
+  th, td { padding: 8px 10px; }
+
+  /* Quiz */
+  .quiz-section { padding: 16px 14px; }
+  .quiz-title { font-size: 0.95rem; }
+  .quiz-question { font-size: 0.84rem; padding: 10px 12px; }
+  .quiz-answer { font-size: 0.82rem; padding: 10px 12px; }
+
+  /* Example box */
+  .example-box { padding: 10px 12px; }
+  .example-label { font-size: 0.72rem; }
+}
+
+/* ── Team footer mobile ── */
+@media (max-width: 768px) {
+  .team-footer { margin-top: 32px; padding-top: 24px; }
+  .team-footer-title { font-size: 0.92rem; }
+  .team-footer-inner { flex-direction: column; }
+  .team-lead-col {
+    border-right: none;
+    border-bottom: 1px solid rgba(99,102,241,0.25);
+    padding: 18px 16px;
+  }
+  .team-juniors-col { padding: 18px 16px; }
+  .team-card { padding: 12px 14px; }
+  .team-card-lead { padding: 16px; min-height: auto; }
+  .team-card-lead .team-avatar-lead { width: 52px; height: 52px; }
+  .team-card-lead .team-name { font-size: 0.95rem; }
+  .team-name { font-size: 0.85rem; }
+  .team-footer-copy { font-size: 0.72rem; }
+}
+
+/* ── Badges wrap on small screens ── */
+@media (max-width: 480px) {
+  .lecture-meta-row { gap: 5px; }
+  .badge { font-size: 0.68rem; padding: 3px 8px; }
+  .card-meta { gap: 5px; }
+  .stats-row { gap: 6px; }
+  .stat-chip { font-size: 0.75rem; padding: 5px 10px; }
+}
+
+/* ── Prevent horizontal overflow globally ── */
+@media (max-width: 768px) {
+  .main-content { overflow-x: hidden; }
+  .lecture-page, .dashboard-page { overflow-x: hidden; }
+}
+
+/* ── Touch-friendly tap targets ── */
+@media (max-width: 768px) {
+  .nav-item { min-height: 44px; }
+  .quiz-question { min-height: 44px; }
+  .complete-btn { min-height: 44px; }
+  .nav-btn { min-height: 44px; }
+  .dash-cta-btn { min-height: 44px; }
+}
+
+/* ── Prevent iOS input zoom (font-size must be >= 16px on mobile) ── */
+@media (max-width: 768px) {
+  .sidebar-search input,
+  .search-bar-home input {
+    font-size: 16px;
+  }
+}
