@@ -1,0 +1,7 @@
+{
+  "buildCommand": "cd awt-learning-hub && npm install && npm run build",
+  "outputDirectory": "awt-learning-hub/dist",
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}
