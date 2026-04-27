@@ -1,7 +1,7 @@
-﻿export const lectures = [
+export const lectures = [
   {
     id: 1,
-    title: "JSON â€“ Structure, Data Types, Conversion & XML Evolution",
+    title: "JSON — Structure, Data Types, Conversion & XML Evolution",
     topic: "JavaScript Object Notation",
     duration: "Self-Study",
     type: "Theory",
@@ -20,8 +20,8 @@
         example: {
           label: "Official Standards",
           points: [
-            "ECMA-404 â€” The JSON Data Interchange Standard",
-            "RFC 8259 â€” Internet Engineering Task Force specification",
+            "ECMA-404 — The JSON Data Interchange Standard",
+            "RFC 8259 — Internet Engineering Task Force specification",
           ],
         },
       },
@@ -32,8 +32,8 @@
           {
             title: "The Two Root Structures",
             content: [
-              "Object { } â€” An unordered collection of name/value pairs. Keys are strings, followed by a colon, then a value. Pairs separated by commas, enclosed in curly braces.",
-              "Array [ ] â€” An ordered sequence of values. Values separated by commas, enclosed in square brackets. Elements can be of any JSON type.",
+              "Object { } — An unordered collection of name/value pairs. Keys are strings, followed by a colon, then a value. Pairs separated by commas, enclosed in curly braces.",
+              "Array [ ] — An ordered sequence of values. Values separated by commas, enclosed in square brackets. Elements can be of any JSON type.",
             ],
           },
           {
@@ -56,12 +56,12 @@
           {
             title: "Structural Rules",
             content: [
-              "Keys must always be strings enclosed in double quotes â€” single quotes are NOT valid JSON.",
+              "Keys must always be strings enclosed in double quotes — single quotes are NOT valid JSON.",
               "Key-value pairs inside objects are separated by commas; the last pair must NOT have a trailing comma.",
               "JSON is case-sensitive: 'Name', 'name', and 'NAME' are three distinct keys.",
-              "Strings must use double quotes â€” special characters must be escaped with a backslash.",
+              "Strings must use double quotes — special characters must be escaped with a backslash.",
               "Whitespace outside of strings is ignored and used only for readability.",
-              "A JSON document must have exactly one root value â€” either an object or an array.",
+              "A JSON document must have exactly one root value — either an object or an array.",
             ],
           },
           {
@@ -103,7 +103,7 @@
         },
         subsections: [
           {
-            title: "String Type â€” Escape Sequences",
+            title: "String Type — Escape Sequences",
             code: `{
   "simple":    "Hello World",
   "withQuote": "He said \\"JSON is great\\"",
@@ -117,7 +117,7 @@
             ],
           },
           {
-            title: "Number Type â€” Constraints",
+            title: "Number Type — Constraints",
             code: `{
   "integer":    42,
   "negative":   -17,
@@ -153,19 +153,19 @@
           {
             title: "Serialization vs Deserialization",
             content: [
-              "Serialization (Encoding) â€” Converting a native data structure into a JSON string. Also called: stringify, marshal, encode, dump. Example: sending data TO an API.",
-              "Deserialization (Decoding) â€” Converting a JSON string into a native data structure. Also called: parse, unmarshal, decode, load. Example: receiving data FROM an API response.",
+              "Serialization (Encoding) — Converting a native data structure into a JSON string. Also called: stringify, marshal, encode, dump. Example: sending data TO an API.",
+              "Deserialization (Decoding) — Converting a JSON string into a native data structure. Also called: parse, unmarshal, decode, load. Example: receiving data FROM an API response.",
             ],
           },
           {
             title: "JavaScript Conversion",
-            code: `// PARSE: JSON string â†’ JavaScript object
+            code: `// PARSE: JSON string †’ JavaScript object
 const jsonString = '{"name":"Ali","age":28,"skills":["JS","React"]}';
 const obj = JSON.parse(jsonString);
 console.log(obj.name);       // "Ali"
 console.log(obj.skills[0]);  // "JS"
 
-// STRINGIFY: JavaScript object â†’ JSON string
+// STRINGIFY: JavaScript object †’ JSON string
 const user = { name: 'Sara', active: true, score: 95.5 };
 const json = JSON.stringify(user);
 // Result: '{"name":"Sara","active":true,"score":95.5}'
@@ -177,12 +177,12 @@ const pretty = JSON.stringify(user, null, 2);`,
             title: "Python Conversion",
             code: `import json
 
-# PARSE: JSON string â†’ Python dict
+# PARSE: JSON string †’ Python dict
 json_str = '{"city":"Karachi","pop":15000000,"coastal":true}'
 data = json.loads(json_str)
 print(data["city"])    # "Karachi"
 
-# DUMP: Python dict â†’ JSON string
+# DUMP: Python dict †’ JSON string
 person = {"name": "Fatima", "age": 30, "languages": ["Urdu", "English"]}
 json_output = json.dumps(person, indent=2)
 
@@ -215,22 +215,22 @@ var str = JsonSerializer.Serialize(myObject);`,
           {
             title: "Common Conversion Pitfalls",
             content: [
-              "Integers larger than 2^53 - 1 cannot be precisely represented â€” use strings for large IDs.",
-              "Date/Time has no JSON type â€” use ISO 8601 strings (\"2024-04-27T10:30:00Z\").",
+              "Integers larger than 2^53 - 1 cannot be precisely represented — use strings for large IDs.",
+              "Date/Time has no JSON type — use ISO 8601 strings (\"2024-04-27T10:30:00Z\").",
               "undefined in JavaScript is NOT valid JSON and is silently dropped during JSON.stringify().",
               "Circular references cause JSON.stringify() to throw an error.",
-              "NaN and Infinity are not valid JSON â€” replace with null or string representation.",
-              "Key order is NOT guaranteed in JSON objects â€” never rely on property order.",
+              "NaN and Infinity are not valid JSON — replace with null or string representation.",
+              "Key order is NOT guaranteed in JSON objects — never rely on property order.",
             ],
           },
         ],
       },
       {
-        heading: "From XML to JSON â€” Technological Evolution",
+        heading: "From XML to JSON — Technological Evolution",
         color: "pink",
         subsections: [
           {
-            title: "The Era of XML (1998â€“2010)",
+            title: "The Era of XML (1998—2010)",
             content: [
               "XML emerged from SGML and became a W3C recommendation in 1998.",
               "Technologies like SOAP, WSDL, XSLT, and RSS were built entirely on XML.",
@@ -253,7 +253,7 @@ var str = JsonSerializer.Serialize(myObject);`,
 </user>`,
           },
           {
-            title: "The Rise of JSON (2001â€“Present)",
+            title: "The Rise of JSON (2001—Present)",
             content: [
               "Douglas Crockford popularized JSON in 2001, recognizing that JavaScript's native object literal syntax could serve as a simple, powerful data format.",
               "The same data in JSON is roughly half the characters, with no closing tags, no XML declaration, and no namespace complexity.",
@@ -271,15 +271,15 @@ var str = JsonSerializer.Serialize(myObject);`,
 }`,
           },
           {
-            title: "XML vs JSON â€” Comparison",
+            title: "XML vs JSON — Comparison",
             table: {
               headers: ["Dimension", "XML", "JSON"],
               rows: [
-                ["Verbosity", "Highly verbose â€” every value needs opening/closing tags", "Concise â€” key-value pairs with minimal syntax"],
-                ["Data Types", "Everything is text â€” types enforced by schema (XSD)", "6 native types: string, number, boolean, null, object, array"],
-                ["Parsing Speed", "Slower â€” complex DOM or SAX parsing required", "Faster â€” JSON.parse() is highly optimized"],
-                ["Payload Size", "Large â€” 30-50% overhead from redundant tag pairs", "Small â€” minimal syntax; compresses well with gzip"],
-                ["Comments", "Supports <!-- comments --> natively", "No comment syntax â€” intentionally excluded"],
+                ["Verbosity", "Highly verbose — every value needs opening/closing tags", "Concise — key-value pairs with minimal syntax"],
+                ["Data Types", "Everything is text — types enforced by schema (XSD)", "6 native types: string, number, boolean, null, object, array"],
+                ["Parsing Speed", "Slower — complex DOM or SAX parsing required", "Faster — JSON.parse() is highly optimized"],
+                ["Payload Size", "Large — 30-50% overhead from redundant tag pairs", "Small — minimal syntax; compresses well with gzip"],
+                ["Comments", "Supports <!-- comments --> natively", "No comment syntax — intentionally excluded"],
                 ["Primary Use", "Documents, configs, legacy enterprise, SOAP", "REST APIs, web apps, config files, NoSQL databases"],
               ],
             },
@@ -294,7 +294,7 @@ var str = JsonSerializer.Serialize(myObject);`,
                 ["2001", "Douglas Crockford coins 'JSON' and registers JSON.org."],
                 ["2004", "Ajax popularized by Google Maps. JSON soon replaces XML in Ajax."],
                 ["2006", "JSON begins appearing in REST APIs. Twitter, Flickr offer JSON responses."],
-                ["2009", "Node.js released â€” JSON becomes natural format for full-stack JS."],
+                ["2009", "Node.js released — JSON becomes natural format for full-stack JS."],
                 ["2013", "ECMA-404 officially standardizes JSON. GitHub, Stripe, Twilio ship JSON-first."],
                 ["2014", "MongoDB reaches v2.6. NoSQL databases accelerate JSON adoption."],
                 ["2017", "RFC 8259 supersedes RFC 4627 with stricter JSON specification."],
@@ -305,12 +305,12 @@ var str = JsonSerializer.Serialize(myObject);`,
           {
             title: "Why JSON Won",
             content: [
-              "Rise of JavaScript â€” a format identical to JS object literals eliminated a parsing step entirely.",
-              "Mobile & Bandwidth â€” JSON's smaller payloads meant real cost savings on early smartphones.",
-              "REST Architecture â€” Roy Fielding's REST principles matched JSON's simplicity perfectly.",
-              "Developer Experience â€” Junior developers could read/write JSON immediately; XML required learning namespaces and schemas.",
-              "Performance â€” JSON parsing is 2-3x faster than equivalent XML in most environments.",
-              "NoSQL Alignment â€” MongoDB, CouchDB, Elasticsearch, and Firebase store data as JSON natively.",
+              "Rise of JavaScript — a format identical to JS object literals eliminated a parsing step entirely.",
+              "Mobile & Bandwidth — JSON's smaller payloads meant real cost savings on early smartphones.",
+              "REST Architecture — Roy Fielding's REST principles matched JSON's simplicity perfectly.",
+              "Developer Experience — Junior developers could read/write JSON immediately; XML required learning namespaces and schemas.",
+              "Performance — JSON parsing is 2-3x faster than equivalent XML in most environments.",
+              "NoSQL Alignment — MongoDB, CouchDB, Elasticsearch, and Firebase store data as JSON natively.",
             ],
           },
           {
@@ -333,7 +333,7 @@ var str = JsonSerializer.Serialize(myObject);`,
             title: "Naming & Structure",
             content: [
               "Use camelCase for key names in web APIs (firstName, not first_name or FirstName).",
-              "Be consistent â€” do not mix camelCase, snake_case, and PascalCase.",
+              "Be consistent — do not mix camelCase, snake_case, and PascalCase.",
               "Use null explicitly for missing values rather than omitting the key.",
               "Design flat structures where possible; excessive nesting harms readability.",
             ],
@@ -341,17 +341,17 @@ var str = JsonSerializer.Serialize(myObject);`,
           {
             title: "Security",
             content: [
-              "Never trust incoming JSON â€” always validate against a schema (Ajv, Joi, Zod) before processing.",
+              "Never trust incoming JSON — always validate against a schema (Ajv, Joi, Zod) before processing.",
               "Sanitize string values to prevent stored XSS attacks when rendering JSON data in HTML.",
-              "Do NOT use eval() to parse JSON â€” always use JSON.parse() which is safe and sandboxed.",
+              "Do NOT use eval() to parse JSON — always use JSON.parse() which is safe and sandboxed.",
               "Limit maximum payload size on APIs to prevent JSON bomb DoS attacks.",
             ],
           },
           {
             title: "Performance",
             content: [
-              "Enable gzip/Brotli compression for JSON API responses â€” typically reduces payload by 70-80%.",
-              "Use pagination for large collections â€” never return unbounded arrays from APIs.",
+              "Enable gzip/Brotli compression for JSON API responses — typically reduces payload by 70-80%.",
+              "Use pagination for large collections — never return unbounded arrays from APIs.",
               "Consider binary formats (MessagePack, CBOR, Protobuf) when JSON parsing becomes a bottleneck.",
               "Use streaming JSON parsers (NDJSON) for very large datasets.",
             ],
@@ -361,7 +361,7 @@ var str = JsonSerializer.Serialize(myObject);`,
     ],
     quiz: [
       { q: "What does JSON stand for?", a: "JavaScript Object Notation" },
-      { q: "How many data types does JSON define?", a: "6 â€” String, Number, Boolean, Null, Object, Array" },
+      { q: "How many data types does JSON define?", a: "6 — String, Number, Boolean, Null, Object, Array" },
       { q: "Are single quotes valid in JSON keys?", a: "No. Keys must always be enclosed in double quotes." },
       { q: "What is serialization in JSON context?", a: "Converting a native data structure into a JSON string (e.g., JSON.stringify() in JS)." },
       { q: "What is deserialization?", a: "Converting a JSON string into a native data structure (e.g., JSON.parse() in JS)." },
@@ -417,7 +417,7 @@ var str = JsonSerializer.Serialize(myObject);`,
           },
           {
             title: "3. Fast Performance",
-            content: ["Uses V8 engine â†’ converts JS directly into machine code."],
+            content: ["Uses V8 engine †’ converts JS directly into machine code."],
           },
           {
             title: "4. Cross-platform",
@@ -429,7 +429,7 @@ var str = JsonSerializer.Serialize(myObject);`,
         heading: "Node.js Architecture Overview",
         color: "purple",
         content: [
-          "Node.js follows: Event-driven, Non-blocking I/O, Clientâ€“Server architecture.",
+          "Node.js follows: Event-driven, Non-blocking I/O, Client—Server architecture.",
         ],
         list: {
           label: "Architecture Flow:",
@@ -456,7 +456,7 @@ var str = JsonSerializer.Serialize(myObject);`,
             content: ["Created by developers.", "Used to organize code."],
             example: {
               label: "Real-life Example",
-              points: ["Like chapters in a book â€“ each chapter handles a specific topic."],
+              points: ["Like chapters in a book — each chapter handles a specific topic."],
             },
           },
           {
@@ -488,8 +488,8 @@ var str = JsonSerializer.Serialize(myObject);`,
             example: {
               label: "Real-life Example",
               points: [
-                "You order food â†’ call the waiter.",
-                "When food is ready â†’ waiter calls you.",
+                "You order food †’ call the waiter.",
+                "When food is ready †’ waiter calls you.",
               ],
             },
           },
@@ -504,7 +504,7 @@ var str = JsonSerializer.Serialize(myObject);`,
         ],
       },
       {
-        heading: "NPM â€“ Node Package Manager",
+        heading: "NPM — Node Package Manager",
         color: "teal",
         content: [
           "NPM stands for Node Package Manager.",
@@ -528,13 +528,13 @@ var str = JsonSerializer.Serialize(myObject);`,
       { q: "What is Node.js built on?", a: "Google Chrome's V8 JavaScript Engine." },
       { q: "Every Node.js file is treated as a ______", a: "Module" },
       { q: "Which core module is used to create a web server?", a: "http" },
-      { q: "Do core modules need to be installed via NPM?", a: "No â€” they are built-in to Node.js." },
+      { q: "Do core modules need to be installed via NPM?", a: "No — they are built-in to Node.js." },
       { q: "Why is Node.js non-blocking?", a: "It uses an event-driven, asynchronous architecture with the Event Loop." },
       { q: "What is the role of the Event Loop?", a: "It continuously checks the call stack, event queue, and callback queue to handle async operations." },
       { q: "What is a callback in Node.js?", a: "A function passed as an argument that is executed after a task is completed." },
       { q: "Difference between Core & Third-party modules?", a: "Core modules are built-in; third-party modules are installed via NPM (e.g., express, mongoose)." },
       { q: "What does package.json contain?", a: "Project name, dependencies, and scripts." },
-      { q: "What is the role of NPM?", a: "Node Package Manager â€” installs libraries and manages project dependencies." },
+      { q: "What is the role of NPM?", a: "Node Package Manager — installs libraries and manages project dependencies." },
     ],
   },
   {
@@ -551,7 +551,7 @@ var str = JsonSerializer.Serialize(myObject);`,
         color: "blue",
         content: [
           "Node.js can act as a web server without any framework using the built-in http module.",
-          "The http module provides low-level primitives for building servers â€” you create a server, listen on a port, and handle requests with a callback.",
+          "The http module provides low-level primitives for building servers — you create a server, listen on a port, and handle requests with a callback.",
           "For each incoming request, Node passes two objects: req (IncomingMessage) and res (ServerResponse).",
           "In practice, most applications need routing (different behavior for different URLs) and often need to read/write files.",
         ],
@@ -595,7 +595,7 @@ console.log(req.method);        // e.g., 'GET'
 console.log(req.url);           // e.g., '/search?q=node'
 console.log(req.headers.host);  // e.g., 'localhost:3000'
 
-// Key point: req.url is NOT a full URL â€” just path + query.
+// Key point: req.url is NOT a full URL — just path + query.
 // To parse it safely, use the URL module with a base.`,
           },
         ],
@@ -615,7 +615,7 @@ console.log(req.headers.host);  // e.g., 'localhost:3000'
               rows: [
                 ["pathname", "/products/42", "The route path"],
                 ["searchParams", "?q=node&limit=10", "Query string key-value pairs"],
-                ["hash", "#section", "Fragment â€” usually client-side only"],
+                ["hash", "#section", "Fragment — usually client-side only"],
               ],
             },
           },
@@ -642,7 +642,7 @@ console.log(u.searchParams.get('q')); // 'node'`,
         content: [
           "Routing means: decide which handler function to run based on HTTP method and URL pathname.",
           "A simple object-based pattern scales better than many if/else statements.",
-          "Frameworks like Express add middleware, parameterized routes, and better error handling â€” but understanding this low-level routing helps you debug real apps.",
+          "Frameworks like Express add middleware, parameterized routes, and better error handling — but understanding this low-level routing helps you debug real apps.",
         ],
         subsections: [
           {
@@ -690,10 +690,10 @@ http.createServer(handler).listen(3000);`,
             table: {
               headers: ["Style", "API", "Use Case"],
               rows: [
-                ["Synchronous (blocking)", "fs.readFileSync, fs.writeFileSync", "Scripts, CLI tools â€” NOT servers"],
+                ["Synchronous (blocking)", "fs.readFileSync, fs.writeFileSync", "Scripts, CLI tools — NOT servers"],
                 ["Callback-based async", "fs.readFile(path, cb)", "Classic Node.js pattern"],
                 ["Promise-based", "fs.promises.readFile(path)", "Modern async/await style"],
-                ["Stream-based", "fs.createReadStream(path)", "Large files â€” most efficient"],
+                ["Stream-based", "fs.createReadStream(path)", "Large files — most efficient"],
               ],
             },
           },
@@ -713,7 +713,7 @@ async function readTextFile(path) {
         heading: "Streams and pipe(): Efficient for Large Data",
         color: "teal",
         content: [
-          "A stream processes data in chunks â€” ideal for large files (videos, logs, downloads) because it avoids loading the entire file into RAM.",
+          "A stream processes data in chunks — ideal for large files (videos, logs, downloads) because it avoids loading the entire file into RAM.",
           "In Node, an HTTP response is a writable stream, so we can stream a file directly to the client using pipe().",
           "Backpressure: If the network is slow, pipe() coordinates flow so memory doesn't grow uncontrollably.",
         ],
@@ -751,7 +751,7 @@ function streamFileToResponse(filePath, res) {
         heading: "Example A: JSON API + Query Parsing",
         color: "indigo",
         content: [
-          "Implement GET /api/echo?msg=hello returning JSON â€” demonstrates URL parsing and query parameters.",
+          "Implement GET /api/echo?msg=hello returning JSON — demonstrates URL parsing and query parameters.",
         ],
         subsections: [
           {
@@ -780,7 +780,7 @@ http.createServer((req, res) => {
         color: "rose",
         content: [
           "A real server often serves HTML/CSS/JS from a public/ folder.",
-          "Security: prevent path traversal â€” users must not be able to request /../secret.txt to escape the public folder.",
+          "Security: prevent path traversal — users must not be able to request /../secret.txt to escape the public folder.",
           "Use path.normalize and confirm the final path stays inside the public directory.",
         ],
         subsections: [
@@ -877,14 +877,14 @@ http.createServer((req, res) => {
       },
     ],
     quiz: [
-      { q: "What are the two objects Node passes to the createServer callback?", a: "req (IncomingMessage) â€” contains method, headers, URL, and readable body stream. res (ServerResponse) â€” used to set status, headers, and write the response body." },
+      { q: "What are the two objects Node passes to the createServer callback?", a: "req (IncomingMessage) — contains method, headers, URL, and readable body stream. res (ServerResponse) — used to set status, headers, and write the response body." },
       { q: "Why do we need a base URL when parsing req.url with the URL class?", a: "Because req.url is a relative path (e.g., '/search?q=node'), not a full URL. The URL constructor requires an absolute URL, so we supply a base like http://localhost:3000." },
-      { q: "What is the difference between fs.readFileSync and fs.createReadStream?", a: "readFileSync is blocking and loads the entire file into memory. createReadStream is non-blocking and processes data in chunks â€” much better for large files in a server." },
+      { q: "What is the difference between fs.readFileSync and fs.createReadStream?", a: "readFileSync is blocking and loads the entire file into memory. createReadStream is non-blocking and processes data in chunks — much better for large files in a server." },
       { q: "What does pipe() do when streaming a file to an HTTP response?", a: "It connects a readable stream (file) to a writable stream (HTTP response), automatically handling chunking and backpressure so memory doesn't grow uncontrollably." },
       { q: "What is path traversal and how do you prevent it?", a: "Path traversal is when a user requests a path like /../secret.txt to escape the public directory. Prevent it by using path.normalize and checking that the resolved path still starts with the public directory base." },
-      { q: "Which fs API style is recommended in a production server and why?", a: "Asynchronous APIs (promise-based or stream-based) â€” they don't block the event loop, so the server can handle other requests while waiting for disk I/O." },
+      { q: "Which fs API style is recommended in a production server and why?", a: "Asynchronous APIs (promise-based or stream-based) — they don't block the event loop, so the server can handle other requests while waiting for disk I/O." },
       { q: "What HTTP status code should you return for a missing file?", a: "404 Not Found." },
-      { q: "Why is manual string splitting of URLs (by '?' and '&') error-prone?", a: "It doesn't handle URL encoding â€” spaces and special characters encoded as %20 or + won't be decoded correctly. The URL class handles this automatically." },
+      { q: "Why is manual string splitting of URLs (by '?' and '&') error-prone?", a: "It doesn't handle URL encoding — spaces and special characters encoded as %20 or + won't be decoded correctly. The URL class handles this automatically." },
       { q: "Write the routing key format used in the object-based router pattern.", a: "The key is a string combining method and pathname: e.g., 'GET /' or 'GET /api/time'. The handler is looked up with routes[`${req.method} ${u.pathname}`]." },
       { q: "What Content-Type header should a JSON API response use?", a: "application/json; charset=utf-8" },
     ],
@@ -895,7 +895,7 @@ http.createServer((req, res) => {
     topic: "Express Framework: Middleware, Routing & Modular Architecture",
     duration: "2 Hours",
     type: "Theory",
-    description: "Express.js core concepts â€” middleware pipeline, routing strategies, express.Router(), and scalable application architecture with separation of concerns.",
+    description: "Express.js core concepts — middleware pipeline, routing strategies, express.Router(), and scalable application architecture with separation of concerns.",
     color: "amber",
     sections: [
       {
@@ -904,7 +904,7 @@ http.createServer((req, res) => {
         content: [
           "Express.js is a minimalist, flexible, and fast Node.js web application framework that provides a robust set of features for web and mobile applications.",
           "It is often referred to as the 'de facto standard' framework for Node.js.",
-          "While Node.js provides core HTTP capabilities, building complex apps directly with the http module is tedious â€” manual URL parsing, body parsing, routing, and auth all need to be handled from scratch.",
+          "While Node.js provides core HTTP capabilities, building complex apps directly with the http module is tedious — manual URL parsing, body parsing, routing, and auth all need to be handled from scratch.",
           "Express.js solves this by providing a structured, extensible approach.",
         ],
         subsections: [
@@ -913,8 +913,8 @@ http.createServer((req, res) => {
             table: {
               headers: ["Characteristic", "Description"],
               rows: [
-                ["Minimalist", "Thin layer over Node.js â€” doesn't obscure its features"],
-                ["Unopinionated", "No forced architecture or database choice â€” full flexibility"],
+                ["Minimalist", "Thin layer over Node.js — doesn't obscure its features"],
+                ["Unopinionated", "No forced architecture or database choice — full flexibility"],
                 ["Performance", "Built on Node.js's fast V8 JavaScript engine"],
                 ["Extensible", "Highly extensible through middleware and routing"],
               ],
@@ -936,7 +936,7 @@ app.listen(3000, () => {
         ],
       },
       {
-        heading: "Middleware â€” Deep Dive",
+        heading: "Middleware — Deep Dive",
         color: "purple",
         content: [
           "Middleware functions have access to the request object (req), the response object (res), and the next middleware function in the application's request-response cycle.",
@@ -949,7 +949,7 @@ app.listen(3000, () => {
               "Execute any code.",
               "Make changes to the request and response objects.",
               "End the request-response cycle (e.g., by sending a response).",
-              "Call the next middleware in the stack via next() â€” if not called, the request hangs.",
+              "Call the next middleware in the stack via next() — if not called, the request hangs.",
             ],
           },
           {
@@ -965,13 +965,13 @@ app.listen(3000, () => {
               "Bound to the app object using app.use() or app.METHOD().",
               "Can be global (no path) or scoped to a specific path prefix.",
             ],
-            code: `// Global â€” runs for every request
+            code: `// Global — runs for every request
 app.use((req, res, next) => {
   console.log('Global middleware');
   next();
 });
 
-// Path-scoped â€” runs only for /users/*
+// Path-scoped — runs only for /users/*
 app.use('/users', (req, res, next) => {
   console.log('Request to /users path');
   next();
@@ -990,9 +990,9 @@ router.use((req, res, next) => {
           {
             title: "3. Built-in Middleware",
             content: [
-              "express.json() â€” Parses incoming requests with JSON payloads. Makes data available on req.body.",
-              "express.urlencoded() â€” Parses URL-encoded request bodies (HTML form submissions).",
-              "express.static() â€” Serves static files (HTML, CSS, images) from a directory.",
+              "express.json() — Parses incoming requests with JSON payloads. Makes data available on req.body.",
+              "express.urlencoded() — Parses URL-encoded request bodies (HTML form submissions).",
+              "express.static() — Serves static files (HTML, CSS, images) from a directory.",
             ],
             code: `app.use(express.json());           // parse JSON bodies
 app.use(express.urlencoded({ extended: true })); // parse form data
@@ -1022,7 +1022,7 @@ app.use(cors());             // Enable Cross-Origin Resource Sharing`,
             title: "Order of Execution",
             content: [
               "Middleware is executed in the order it is defined with app.use() or app.METHOD().",
-              "If a middleware does not call next(), the request-response cycle terminates â€” subsequent middleware and route handlers are never reached.",
+              "If a middleware does not call next(), the request-response cycle terminates — subsequent middleware and route handlers are never reached.",
             ],
           },
         ],
@@ -1031,7 +1031,7 @@ app.use(cors());             // Enable Cross-Origin Resource Sharing`,
         heading: "Routing in Express",
         color: "green",
         content: [
-          "Routing determines how an application responds to a client request to a particular endpoint â€” a URI (path) and a specific HTTP method.",
+          "Routing determines how an application responds to a client request to a particular endpoint — a URI (path) and a specific HTTP method.",
           "Basic syntax: app.METHOD(PATH, HANDLER)",
         ],
         subsections: [
@@ -1109,13 +1109,13 @@ app.get('/profile', checkAuth, getUser);`,
         heading: "Modular Routing with express.Router()",
         color: "orange",
         content: [
-          "As an application grows, app.js becomes cluttered with numerous route definitions â€” hard to manage, especially with multiple resource types (users, products, orders).",
+          "As an application grows, app.js becomes cluttered with numerous route definitions — hard to manage, especially with multiple resource types (users, products, orders).",
           "express.Router() creates modular, mountable route handlers. A Router instance is a complete middleware and routing system.",
           "You create separate router files for different API resources, then mount them onto specific paths in app.js.",
         ],
         subsections: [
           {
-            title: "Creating a Router â€” routes/users.js",
+            title: "Creating a Router — routes/users.js",
             code: `// routes/users.js
 const express = require('express');
 const router = express.Router();
@@ -1143,7 +1143,7 @@ router.delete('/:id', (req, res) => {
 module.exports = router;`,
           },
           {
-            title: "Mounting the Router â€” app.js",
+            title: "Mounting the Router — app.js",
             code: `// app.js
 const express = require('express');
 const app = express();
@@ -1154,9 +1154,9 @@ const usersRouter = require('./routes/users');
 app.use('/api/users', usersRouter); // mount at /api/users
 
 // Now:
-// GET  /api/users       â†’ router.get('/')
-// GET  /api/users/123   â†’ router.get('/:id')
-// POST /api/users       â†’ router.post('/')
+// GET  /api/users       †’ router.get('/')
+// GET  /api/users/123   †’ router.get('/:id')
+// POST /api/users       †’ router.post('/')
 
 app.listen(3000, () => console.log('Server on port 3000'));`,
           },
@@ -1204,27 +1204,27 @@ app.use('/admin', require('./routes/admin'));`,
         color: "pink",
         content: [
           "A well-structured application is crucial for maintainability and scalability.",
-          "Express is unopinionated, but common patterns emerge â€” often resembling MVC (Model-View-Controller) or a layered architecture.",
+          "Express is unopinionated, but common patterns emerge — often resembling MVC (Model-View-Controller) or a layered architecture.",
         ],
         subsections: [
           {
             title: "Recommended Directory Structure",
             code: `project/
-â”œâ”€â”€ app.js              # Entry point â€” init Express, global middleware, mount routers
-â”œâ”€â”€ config/             # DB config, environment settings
-â”œâ”€â”€ routes/             # Route definitions (use express.Router)
-â”‚   â”œâ”€â”€ users.js
-â”‚   â””â”€â”€ products.js
-â”œâ”€â”€ controllers/        # Business logic â€” handle req/res, call models
-â”‚   â”œâ”€â”€ usersController.js
-â”‚   â””â”€â”€ productsController.js
-â”œâ”€â”€ models/             # Database schemas (e.g., Mongoose)
-â”‚   â”œâ”€â”€ User.js
-â”‚   â””â”€â”€ Product.js
-â”œâ”€â”€ middleware/         # Reusable middleware
-â”‚   â”œâ”€â”€ auth.js
-â”‚   â””â”€â”€ logger.js
-â””â”€â”€ public/             # Static assets (HTML, CSS, JS, images)`,
+”œ”—€ app.js              # Entry point — init Express, global middleware, mount routers
+”œ”—€ config/             # DB config, environment settings
+”œ”—€ routes/             # Route definitions (use express.Router)
+”‚   ”œ”—€ users.js
+”‚   ”””—€ products.js
+”œ”—€ controllers/        # Business logic — handle req/res, call models
+”‚   ”œ”—€ usersController.js
+”‚   ”””—€ productsController.js
+”œ”—€ models/             # Database schemas (e.g., Mongoose)
+”‚   ”œ”—€ User.js
+”‚   ”””—€ Product.js
+”œ”—€ middleware/         # Reusable middleware
+”‚   ”œ”—€ auth.js
+”‚   ”””—€ logger.js
+”””—€ public/             # Static assets (HTML, CSS, JS, images)`,
           },
           {
             title: "Separation of Concerns",
@@ -1241,13 +1241,13 @@ app.use('/admin', require('./routes/admin'));`,
             },
           },
           {
-            title: "Request Flow: Client â†’ Server",
+            title: "Request Flow: Client †’ Server",
             content: [
-              "1. Client sends HTTP request â€” e.g., GET /api/users/123",
+              "1. Client sends HTTP request — e.g., GET /api/users/123",
               "2. app.js receives the request.",
-              "3. Global middleware runs â€” express.json(), logging middleware.",
+              "3. Global middleware runs — express.json(), logging middleware.",
               "4. app.js matches /api/users and forwards to usersRouter.",
-              "5. Router-level middleware runs â€” e.g., authentication check.",
+              "5. Router-level middleware runs — e.g., authentication check.",
               "6. usersRouter matches /:id and calls usersController.getUserById.",
               "7. Controller interacts with the User model to fetch data from DB.",
               "8. Model returns data to the controller.",
@@ -1257,7 +1257,7 @@ app.use('/admin', require('./routes/admin'));`,
           },
           {
             title: "Global vs Route-Specific Middleware",
-            code: `// app.js â€” Global middleware (runs for ALL requests)
+            code: `// app.js — Global middleware (runs for ALL requests)
 app.use(express.json());
 app.use((req, res, next) => {
   console.log(\`[\${new Date().toISOString()}] \${req.method} \${req.url}\`);
@@ -1280,16 +1280,16 @@ app.get('/admin', authMiddleware, (req, res) => {
       },
     ],
     quiz: [
-      { q: "What is Express.js and why use it over plain Node.js http module?", a: "Express.js is a minimalist Node.js web framework. It simplifies URL parsing, body parsing, routing, and middleware integration â€” tasks that require manual effort with the raw http module." },
+      { q: "What is Express.js and why use it over plain Node.js http module?", a: "Express.js is a minimalist Node.js web framework. It simplifies URL parsing, body parsing, routing, and middleware integration — tasks that require manual effort with the raw http module." },
       { q: "What are the 5 types of middleware in Express?", a: "Application-level, Router-level, Built-in (express.json, express.static, express.urlencoded), Third-party (morgan, cors), and Error-handling middleware." },
-      { q: "What happens if next() is not called in a middleware?", a: "The request-response cycle terminates â€” the next middleware or route handler is never executed, and the client hangs waiting for a response." },
+      { q: "What happens if next() is not called in a middleware?", a: "The request-response cycle terminates — the next middleware or route handler is never executed, and the client hangs waiting for a response." },
       { q: "What is the signature of error-handling middleware and where must it be placed?", a: "It takes 4 arguments: (err, req, res, next). It must be defined last in the middleware stack, after all routes." },
       { q: "What is the difference between app.use() and app.get()?", a: "app.use() applies middleware to all HTTP methods and optionally a path prefix. app.get() defines a handler specifically for GET requests on an exact path." },
       { q: "How do you access route parameters like /users/:id?", a: "Via req.params.id inside the route handler." },
       { q: "What problem does express.Router() solve?", a: "As apps grow, app.js becomes cluttered with all routes. Router() lets you split routes into separate files by resource (users, products) and mount them at specific base paths." },
       { q: "What does app.use('/api/users', usersRouter) do?", a: "It mounts the usersRouter at the /api/users base path. All routes defined in usersRouter are now prefixed with /api/users." },
-      { q: "What is the role of controllers/ in Express application architecture?", a: "Controllers contain the business logic for handling specific requests â€” they receive req/res from routes and interact with models to fetch or modify data." },
-      { q: "Describe the full request flow for GET /api/users/123 in a well-structured Express app.", a: "1. app.js receives request â†’ 2. Global middleware runs â†’ 3. Matched to /api/users, forwarded to usersRouter â†’ 4. Router middleware (auth) runs â†’ 5. /:id matched, calls getUserById controller â†’ 6. Controller queries User model â†’ 7. Model returns data â†’ 8. Controller sends res.json() â†’ 9. Error middleware catches any errors." },
+      { q: "What is the role of controllers/ in Express application architecture?", a: "Controllers contain the business logic for handling specific requests — they receive req/res from routes and interact with models to fetch or modify data." },
+      { q: "Describe the full request flow for GET /api/users/123 in a well-structured Express app.", a: "1. app.js receives request †’ 2. Global middleware runs †’ 3. Matched to /api/users, forwarded to usersRouter †’ 4. Router middleware (auth) runs †’ 5. /:id matched, calls getUserById controller †’ 6. Controller queries User model †’ 7. Model returns data †’ 8. Controller sends res.json() †’ 9. Error middleware catches any errors." },
     ],
   },
   {
@@ -1298,7 +1298,7 @@ app.get('/admin', authMiddleware, (req, res) => {
     topic: "Middleware, Routing, and Routers in Express",
     duration: "2 Hours",
     type: "Theory",
-    description: "Express.js framework fundamentals â€” middleware types, routing, Express Router, and scalable application architecture with MVC.",
+    description: "Express.js framework fundamentals — middleware types, routing, Express Router, and scalable application architecture with MVC.",
     color: "violet",
     sections: [
       {
@@ -1335,11 +1335,11 @@ app.listen(3000, () => {
           {
             title: "Key Components",
             content: [
-              "app â†’ Application object",
-              "app.get() â†’ Route definition",
-              "req â†’ Request object",
-              "res â†’ Response object",
-              "app.listen() â†’ Starts the server",
+              "app †’ Application object",
+              "app.get() †’ Route definition",
+              "req †’ Request object",
+              "res †’ Response object",
+              "app.listen() †’ Starts the server",
             ],
           },
         ],
@@ -1355,10 +1355,10 @@ app.listen(3000, () => {
         example: {
           label: "Real-Life Analogy: Airport Security",
           points: [
-            "1. Passenger arrives â†’ Request",
-            "2. Security checks passport â†’ Middleware 1",
-            "3. Baggage scan â†’ Middleware 2",
-            "4. Boarding gate â†’ Route handler",
+            "1. Passenger arrives †’ Request",
+            "2. Security checks passport †’ Middleware 1",
+            "3. Baggage scan †’ Middleware 2",
+            "4. Boarding gate †’ Route handler",
           ],
         },
         subsections: [
@@ -1372,13 +1372,13 @@ app.listen(3000, () => {
           },
           {
             title: "2. Router-Level Middleware",
-            content: ["Used inside Router objects â€” scoped to specific route groups."],
+            content: ["Used inside Router objects — scoped to specific route groups."],
           },
           {
             title: "3. Built-in Middleware",
             content: [
-              "express.json() â†’ Parses incoming JSON request bodies.",
-              "express.static() â†’ Serves static files (HTML, CSS, images) from a folder.",
+              "express.json() †’ Parses incoming JSON request bodies.",
+              "express.static() †’ Serves static files (HTML, CSS, images) from a folder.",
             ],
           },
           {
@@ -1392,10 +1392,10 @@ app.listen(3000, () => {
           {
             title: "Why Middleware is Powerful",
             content: [
-              "Authentication â€” verify tokens before reaching route handlers.",
-              "Logging â€” record every request for debugging and monitoring.",
-              "Data validation â€” reject malformed requests early.",
-              "Error handling â€” centralize error responses in one place.",
+              "Authentication — verify tokens before reaching route handlers.",
+              "Logging — record every request for debugging and monitoring.",
+              "Data validation — reject malformed requests early.",
+              "Error handling — centralize error responses in one place.",
             ],
           },
         ],
@@ -1405,7 +1405,7 @@ app.listen(3000, () => {
         color: "purple",
         content: [
           "Routing refers to how an application responds to client requests for a specific endpoint.",
-          "Think of routing like Google Maps â€” different routes lead to different destinations, and the URL determines which function runs.",
+          "Think of routing like Google Maps — different routes lead to different destinations, and the URL determines which function runs.",
         ],
         subsections: [
           {
@@ -1435,7 +1435,7 @@ app.post('/login', (req, res) => {
             title: "Route Parameters",
             content: [
               "Route parameters are named URL segments used to capture values at specific positions.",
-              "Accessed via req.params. Example: /user/5 â†’ req.params.id = '5'",
+              "Accessed via req.params. Example: /user/5 †’ req.params.id = '5'",
             ],
             code: `app.get('/user/:id', (req, res) => {
   res.send(\`User ID: \${req.params.id}\`);
@@ -1464,20 +1464,20 @@ app.get('/search', (req, res) => {
         content: [
           "Router allows us to separate routes into different files and organize large applications.",
           "It makes applications scalable and clean.",
-          "Imagine a project with 50 routes and multiple modules â€” putting everything in one file becomes messy and unmanageable.",
+          "Imagine a project with 50 routes and multiple modules — putting everything in one file becomes messy and unmanageable.",
         ],
         example: {
           label: "Real-Life Analogy: University Departments",
           points: [
-            "Admission Office â†’ /admissions",
-            "Accounts Office â†’ /accounts",
-            "Examination Office â†’ /exams",
+            "Admission Office †’ /admissions",
+            "Accounts Office †’ /accounts",
+            "Examination Office †’ /exams",
             "Each department handles its own tasks independently.",
           ],
         },
         subsections: [
           {
-            title: "Creating a Router â€” routes/user.js",
+            title: "Creating a Router — routes/user.js",
             code: `const express = require('express');
 const router = express.Router();
 
@@ -1499,7 +1499,7 @@ router.post('/', (req, res) => {
 module.exports = router;`,
           },
           {
-            title: "Mounting the Router â€” app.js",
+            title: "Mounting the Router — app.js",
             code: `const express = require('express');
 const app = express();
 app.use(express.json());
@@ -1517,27 +1517,27 @@ app.listen(3000, () => console.log("Server on port 3000"));`,
         color: "teal",
         content: [
           "Express applications often follow the MVC (Model-View-Controller) pattern.",
-          "Model â†’ Database logic. View â†’ Frontend (EJS/React etc.). Controller â†’ Business logic.",
-          "Middleware order matters â€” Express executes middleware in the order it is defined.",
+          "Model †’ Database logic. View †’ Frontend (EJS/React etc.). Controller †’ Business logic.",
+          "Middleware order matters — Express executes middleware in the order it is defined.",
         ],
         subsections: [
           {
             title: "Recommended Folder Structure",
             code: `project/
-â”œâ”€â”€ app.js
-â”œâ”€â”€ routes/
-â”‚   â”œâ”€â”€ user.js
-â”‚   â””â”€â”€ product.js
-â”œâ”€â”€ middleware/
-â”‚   â”œâ”€â”€ auth.js
-â”‚   â””â”€â”€ logger.js
-â”œâ”€â”€ controllers/
-â”‚   â””â”€â”€ userController.js
-â””â”€â”€ models/
-    â””â”€â”€ User.js`,
+”œ”—€ app.js
+”œ”—€ routes/
+”‚   ”œ”—€ user.js
+”‚   ”””—€ product.js
+”œ”—€ middleware/
+”‚   ”œ”—€ auth.js
+”‚   ”””—€ logger.js
+”œ”—€ controllers/
+”‚   ”””—€ userController.js
+”””—€ models/
+    ”””—€ User.js`,
           },
           {
-            title: "Controllers â€” Separating Business Logic",
+            title: "Controllers — Separating Business Logic",
             content: [
               "Instead of writing handler logic inline in routes, move it to controller files.",
               "This improves readability, maintainability, and supports scaling.",
@@ -1557,8 +1557,8 @@ router.get('/', userController.getUsers); // clean!`,
               "Express executes middleware in the order it is registered.",
               "If auth middleware fails, the route handler never executes.",
             ],
-            code: `app.use(logger);       // runs first â€” logs every request
-app.use(auth);         // runs second â€” blocks unauthorized requests
+            code: `app.use(logger);       // runs first — logs every request
+app.use(auth);         // runs second — blocks unauthorized requests
 app.use('/users', userRoutes); // only reached if auth passes`,
           },
           {
@@ -1570,7 +1570,7 @@ module.exports = (req, res, next) => {
     return res.status(401).json({ error: "Unauthorized" });
   }
   // verify token logic here...
-  next(); // token valid â€” proceed
+  next(); // token valid — proceed
 };`,
           },
         ],
@@ -1580,7 +1580,7 @@ module.exports = (req, res, next) => {
       { q: "What is Express.js?", a: "A minimal and flexible web framework built on top of Node.js for building web servers and APIs." },
       { q: "What is middleware in Express?", a: "A function that executes after receiving a request and before sending a response. It has access to req, res, and next()." },
       { q: "What is the difference between app.use() and app.get()?", a: "app.use() applies middleware to all HTTP methods and optionally a path prefix. app.get() defines a route handler specifically for GET requests on an exact path." },
-      { q: "What happens if next() is not called in a middleware?", a: "The request-response cycle is stuck â€” the next middleware or route handler never executes, and the client hangs waiting for a response." },
+      { q: "What happens if next() is not called in a middleware?", a: "The request-response cycle is stuck — the next middleware or route handler never executes, and the client hangs waiting for a response." },
       { q: "Why is middleware order important in Express?", a: "Express executes middleware in the order it is registered. If auth middleware is placed before routes, unauthorized requests are blocked before reaching any route handler." },
       { q: "What are the 4 types of middleware in Express?", a: "Application-level, Router-level, Built-in (express.json, express.static), and Error-handling middleware." },
       { q: "Why use Express Router instead of defining all routes in app.js?", a: "Router separates routes into different files, making large applications organized, scalable, and maintainable." },
@@ -1603,19 +1603,19 @@ module.exports = (req, res, next) => {
         color: "purple",
         content: [
           "In web development, a View is the part of an application responsible for displaying data to users.",
-          "It belongs to the MVC Architecture â€” Model handles data, View displays data, Controller controls logic & flow.",
-          "Example: Model â†’ Student database | View â†’ Student list page | Controller â†’ Fetches students and sends to View.",
+          "It belongs to the MVC Architecture — Model handles data, View displays data, Controller controls logic & flow.",
+          "Example: Model †’ Student database | View †’ Student list page | Controller †’ Fetches students and sends to View.",
         ],
         subsections: [
           {
             title: "What is a View Generator?",
             content: [
               "A View Generator automatically creates UI files (HTML templates or views) based on models.",
-              "It saves time and reduces manual coding â€” this process is often called Scaffolding.",
+              "It saves time and reduces manual coding — this process is often called Scaffolding.",
             ],
           },
           {
-            title: "Scaffolding Example â€” University Management System",
+            title: "Scaffolding Example — University Management System",
             content: [
               "You define a Student model: id, name, email, department.",
               "The view generator automatically creates: List View, Create Form, Edit Page, Delete Confirmation page.",
@@ -1628,10 +1628,10 @@ Student:
   - department
 
 // Auto-generated views (scaffolding):
-â†’ GET  /students        â†’ List View
-â†’ GET  /students/new    â†’ Create Form
-â†’ GET  /students/:id/edit â†’ Edit Page
-â†’ DELETE /students/:id  â†’ Delete Confirmation`,
+†’ GET  /students        †’ List View
+†’ GET  /students/new    †’ Create Form
+†’ GET  /students/:id/edit †’ Edit Page
+†’ DELETE /students/:id  †’ Delete Confirmation`,
           },
           {
             title: "Frameworks with View Generators",
@@ -1648,16 +1648,16 @@ Student:
           {
             title: "Advantages of View Generators",
             content: [
-              "Fast development â€” generate full CRUD views in seconds.",
-              "Reduces human errors â€” consistent, tested templates.",
-              "Consistent design â€” uniform UI across all views.",
-              "Easy maintenance â€” update the model, regenerate views.",
+              "Fast development — generate full CRUD views in seconds.",
+              "Reduces human errors — consistent, tested templates.",
+              "Consistent design — uniform UI across all views.",
+              "Easy maintenance — update the model, regenerate views.",
             ],
           },
         ],
       },
       {
-        heading: "Bootstrap â€” Responsive UI Framework",
+        heading: "Bootstrap — Responsive UI Framework",
         color: "blue",
         content: [
           "Bootstrap is a front-end framework used to design responsive websites quickly.",
@@ -1680,8 +1680,8 @@ Student:
             title: "Bootstrap Grid System",
             content: [
               "Bootstrap uses a 12-column layout system.",
-              "6 columns â†’ Half width | 4 columns â†’ One-third | 12 columns â†’ Full width.",
-              "Breakpoints: xs (<576px), sm (â‰¥576px), md (â‰¥768px), lg (â‰¥992px), xl (â‰¥1200px).",
+              "6 columns †’ Half width | 4 columns †’ One-third | 12 columns †’ Full width.",
+              "Breakpoints: xs (<576px), sm (‰¥576px), md (‰¥768px), lg (‰¥992px), xl (‰¥1200px).",
             ],
             code: `<!-- 2-column layout -->
 <div class="container">
@@ -1715,11 +1715,11 @@ Student:
           },
           {
             title: "Adding Bootstrap to an Express/EJS App",
-            code: `<!-- In your HTML <head> â€” CDN method -->
+            code: `<!-- In your HTML <head> — CDN method -->
 <link rel="stylesheet"
   href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 
-<!-- Before </body> â€” JS bundle -->
+<!-- Before </body> — JS bundle -->
 <script
   src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js">
 </script>
@@ -1727,7 +1727,7 @@ Student:
 <!-- Or via npm -->
 npm install bootstrap
 
-// In app.js â€” serve Bootstrap from node_modules
+// In app.js — serve Bootstrap from node_modules
 app.use('/css', express.static('node_modules/bootstrap/dist/css'));`,
           },
         ],
@@ -1736,7 +1736,7 @@ app.use('/css', express.static('node_modules/bootstrap/dist/css'));`,
         heading: "REST Architecture Principles",
         color: "green",
         content: [
-          "REST stands for Representational State Transfer â€” an architectural style for designing web services.",
+          "REST stands for Representational State Transfer — an architectural style for designing web services.",
           "Introduced by Roy Fielding in his doctoral dissertation (2000).",
         ],
         subsections: [
@@ -1745,8 +1745,8 @@ app.use('/css', express.static('node_modules/bootstrap/dist/css'));`,
             table: {
               headers: ["Constraint", "Description"],
               rows: [
-                ["Client-Server", "Frontend and backend are separated â€” independent evolution"],
-                ["Stateless", "Each request contains all necessary info â€” server stores no session"],
+                ["Client-Server", "Frontend and backend are separated — independent evolution"],
+                ["Stateless", "Each request contains all necessary info — server stores no session"],
                 ["Cacheable", "Responses can be cached to improve performance"],
                 ["Uniform Interface", "Consistent resource identification and manipulation via URIs"],
                 ["Layered System", "Client can't tell if connected directly to server or intermediary"],
@@ -1755,16 +1755,16 @@ app.use('/css', express.static('node_modules/bootstrap/dist/css'));`,
             },
           },
           {
-            title: "Statelessness â€” Deep Dive",
+            title: "Statelessness — Deep Dive",
             content: [
               "Each request from client to server must contain ALL necessary information.",
-              "Server does NOT remember previous requests â€” no session stored server-side.",
+              "Server does NOT remember previous requests — no session stored server-side.",
               "Benefits: scalability (any server can handle any request), reliability, simplicity.",
             ],
             example: {
               label: "Real-Life Analogy: ATM Machine",
               points: [
-                "Every transaction requires card + PIN â€” machine doesn't remember previous customer.",
+                "Every transaction requires card + PIN — machine doesn't remember previous customer.",
                 "In Web API: each request includes authentication token + required parameters.",
                 "Stateful (bad): Server remembers 'user logged in' between requests.",
                 "Stateless (good): Every request carries a JWT token to prove identity.",
@@ -1776,7 +1776,7 @@ app.use('/css', express.static('node_modules/bootstrap/dist/css'));`,
             content: [
               "An operation is idempotent if performing it multiple times gives the same result.",
               "Idempotent methods: GET, PUT, DELETE.",
-              "NOT idempotent: POST â€” each call creates a new resource.",
+              "NOT idempotent: POST — each call creates a new resource.",
             ],
             table: {
               headers: ["Method", "Idempotent?", "Reason"],
@@ -1784,8 +1784,8 @@ app.use('/css', express.static('node_modules/bootstrap/dist/css'));`,
                 ["GET", "Yes", "Reading data never changes state"],
                 ["PUT", "Yes", "Replacing a resource with same data = same result"],
                 ["DELETE", "Yes", "Deleting an already-deleted resource = still deleted"],
-                ["POST", "No", "Each call creates a new resource â€” different result each time"],
-                ["PATCH", "No*", "Depends on implementation â€” partial updates may not be idempotent"],
+                ["POST", "No", "Each call creates a new resource — different result each time"],
+                ["PATCH", "No*", "Depends on implementation — partial updates may not be idempotent"],
               ],
             },
           },
@@ -1795,7 +1795,7 @@ app.use('/css', express.static('node_modules/bootstrap/dist/css'));`,
         heading: "HTTP Method Selection",
         color: "orange",
         content: [
-          "REST uses HTTP methods semantically â€” each method has a specific, well-defined purpose.",
+          "REST uses HTTP methods semantically — each method has a specific, well-defined purpose.",
           "Choosing the correct method makes your API predictable and self-documenting.",
         ],
         subsections: [
@@ -1815,11 +1815,11 @@ app.use('/css', express.static('node_modules/bootstrap/dist/css'));`,
           {
             title: "Online Store Example",
             content: [
-              "GET /products â†’ View all products (safe, idempotent)",
-              "POST /products â†’ Add a new product (creates new resource each time)",
-              "PUT /products/1 â†’ Replace product #1 entirely",
-              "PATCH /products/1 â†’ Update only the price of product #1",
-              "DELETE /products/1 â†’ Remove product #1",
+              "GET /products †’ View all products (safe, idempotent)",
+              "POST /products †’ Add a new product (creates new resource each time)",
+              "PUT /products/1 †’ Replace product #1 entirely",
+              "PATCH /products/1 †’ Update only the price of product #1",
+              "DELETE /products/1 †’ Remove product #1",
             ],
           },
           {
@@ -1836,48 +1836,48 @@ app.use('/css', express.static('node_modules/bootstrap/dist/css'));`,
         heading: "Resource Identification & URI Design",
         color: "pink",
         content: [
-          "In REST, a Resource is any object or data â€” Student, Course, Product, Order.",
+          "In REST, a Resource is any object or data — Student, Course, Product, Order.",
           "Resources are identified by URIs (Uniform Resource Identifiers).",
-          "Resources should be nouns, not verbs â€” the HTTP method expresses the action.",
+          "Resources should be nouns, not verbs — the HTTP method expresses the action.",
         ],
         subsections: [
           {
             title: "URI Design Rules",
             content: [
-              "Use nouns, not verbs â€” /students not /getStudents.",
-              "Use plural form â€” /students not /student.",
-              "Use hierarchical structure for relationships â€” /students/10/courses.",
-              "Use lowercase and hyphens â€” /blog-posts not /BlogPosts.",
-              "Never use trailing slashes â€” /students not /students/.",
+              "Use nouns, not verbs — /students not /getStudents.",
+              "Use plural form — /students not /student.",
+              "Use hierarchical structure for relationships — /students/10/courses.",
+              "Use lowercase and hyphens — /blog-posts not /BlogPosts.",
+              "Never use trailing slashes — /students not /students/.",
             ],
           },
           {
             title: "Good vs Bad URI Design",
             table: {
-              headers: ["Bad URI âŒ", "Good URI âœ…", "Reason"],
+              headers: ["Bad URI Œ", "Good URI œ…", "Reason"],
               rows: [
-                ["/createStudent", "POST /students", "Verb in URI â€” use HTTP method instead"],
+                ["/createStudent", "POST /students", "Verb in URI — use HTTP method instead"],
                 ["/deleteStudent", "DELETE /students/1", "Action belongs to HTTP method"],
                 ["/updateStudent", "PUT /students/1", "Use PUT/PATCH for updates"],
-                ["/getStudentList", "GET /students", "GET is implied â€” noun only"],
+                ["/getStudentList", "GET /students", "GET is implied — noun only"],
                 ["/student", "GET /students", "Use plural form"],
               ],
             },
           },
           {
-            title: "University REST API â€” Full Example",
+            title: "University REST API — Full Example",
             code: `// Students resource
-GET    /students          â†’ Get all students
-GET    /students/:id      â†’ Get student by ID
-POST   /students          â†’ Create new student
-PUT    /students/:id      â†’ Update student (full replace)
-PATCH  /students/:id      â†’ Update student (partial)
-DELETE /students/:id      â†’ Delete student
+GET    /students          †’ Get all students
+GET    /students/:id      †’ Get student by ID
+POST   /students          †’ Create new student
+PUT    /students/:id      †’ Update student (full replace)
+PATCH  /students/:id      †’ Update student (partial)
+DELETE /students/:id      †’ Delete student
 
 // Nested resources (relationships)
-GET    /students/:id/courses     â†’ Get courses for a student
-POST   /students/:id/courses     â†’ Enroll student in a course
-DELETE /students/:id/courses/:cid â†’ Unenroll from a course
+GET    /students/:id/courses     †’ Get courses for a student
+POST   /students/:id/courses     †’ Enroll student in a course
+DELETE /students/:id/courses/:cid †’ Unenroll from a course
 
 // Query parameters for filtering
 GET /students?department=CS&year=2
@@ -1904,11 +1904,11 @@ GET /students?page=1&limit=20`,
     quiz: [
       { q: "What does MVC stand for and what is the role of each layer?", a: "Model-View-Controller. Model handles data, View displays data to users, Controller controls logic and flow between Model and View." },
       { q: "What is scaffolding in web development?", a: "Scaffolding is the automatic generation of CRUD views (List, Create, Edit, Delete) based on a model definition. It saves time and reduces manual coding." },
-      { q: "What is Bootstrap and what problem does it solve?", a: "Bootstrap is a front-end CSS framework that provides a responsive grid system, pre-built components, and consistent styling â€” eliminating the need to write CSS from scratch." },
+      { q: "What is Bootstrap and what problem does it solve?", a: "Bootstrap is a front-end CSS framework that provides a responsive grid system, pre-built components, and consistent styling — eliminating the need to write CSS from scratch." },
       { q: "What is Bootstrap's grid system based on?", a: "A 12-column layout. Columns can be combined: 6+6 = half width, 4+4+4 = thirds, 12 = full width. Responsive breakpoints (sm, md, lg, xl) control layout at different screen sizes." },
       { q: "What does REST stand for and who introduced it?", a: "Representational State Transfer. Introduced by Roy Fielding in his doctoral dissertation in 2000." },
-      { q: "What is statelessness in REST and why is it important?", a: "Each request must contain all necessary information â€” the server stores no session state between requests. This enables scalability (any server can handle any request) and reliability." },
-      { q: "What is idempotency? Which HTTP methods are idempotent?", a: "An operation is idempotent if performing it multiple times gives the same result. GET, PUT, and DELETE are idempotent. POST is NOT â€” each call creates a new resource." },
+      { q: "What is statelessness in REST and why is it important?", a: "Each request must contain all necessary information — the server stores no session state between requests. This enables scalability (any server can handle any request) and reliability." },
+      { q: "What is idempotency? Which HTTP methods are idempotent?", a: "An operation is idempotent if performing it multiple times gives the same result. GET, PUT, and DELETE are idempotent. POST is NOT — each call creates a new resource." },
       { q: "What is the difference between a 'safe' and an 'idempotent' HTTP method?", a: "Safe: does not modify server state (only GET/HEAD). Idempotent: multiple identical requests have the same effect as one (GET, PUT, DELETE). All safe methods are idempotent, but not vice versa." },
       { q: "Why should REST URIs use nouns instead of verbs?", a: "Because the HTTP method (GET, POST, PUT, DELETE) already expresses the action. Using verbs in URIs is redundant and breaks the uniform interface constraint. Use /students not /getStudents." },
       { q: "Design a REST API for an Online Food Ordering System with at least 3 resources.", a: "Resources: /restaurants, /menus, /orders. Examples: GET /restaurants, POST /orders, GET /orders/:id, PUT /orders/:id, DELETE /orders/:id, GET /restaurants/:id/menus, POST /restaurants/:id/menus." },
@@ -1964,7 +1964,7 @@ GET /students?page=1&limit=20`,
           {
             title: "How It Works",
             content: [
-              "User logs in â†’ server creates a session and stores it in memory/database.",
+              "User logs in †’ server creates a session and stores it in memory/database.",
               "Server sends a session ID cookie to the client.",
               "Client sends the cookie with every subsequent request.",
               "Server looks up the session ID to identify the user.",
@@ -1973,9 +1973,9 @@ GET /students?page=1&limit=20`,
           {
             title: "The Problem",
             content: [
-              "Not scalable for large distributed systems â€” every server must share session storage.",
+              "Not scalable for large distributed systems — every server must share session storage.",
               "Requires sticky sessions or a shared session store (e.g., Redis) in multi-server setups.",
-              "Stateful â€” violates REST's statelessness principle.",
+              "Stateful — violates REST's statelessness principle.",
             ],
           },
         ],
@@ -1991,8 +1991,8 @@ GET /students?page=1&limit=20`,
         example: {
           label: "Real-Life Analogy: Movie Ticket ðŸŽŸ",
           points: [
-            "You show your ticket â†’ you enter the cinema.",
-            "No need to verify your identity again â€” the ticket itself proves you paid.",
+            "You show your ticket †’ you enter the cinema.",
+            "No need to verify your identity again — the ticket itself proves you paid.",
             "JWT works the same way: the token carries all necessary info.",
           ],
         },
@@ -2000,8 +2000,8 @@ GET /students?page=1&limit=20`,
           {
             title: "Why JWT in REST APIs?",
             content: [
-              "REST APIs are stateless â€” JWT fits perfectly by avoiding server-side session storage.",
-              "Scales easily across multiple servers â€” any server can verify the token.",
+              "REST APIs are stateless — JWT fits perfectly by avoiding server-side session storage.",
+              "Scales easily across multiple servers — any server can verify the token.",
               "Works across multiple services and domains (microservices, mobile apps).",
             ],
           },
@@ -2028,9 +2028,9 @@ GET /students?page=1&limit=20`,
           {
             title: "2. Payload",
             content: [
-              "Contains claims â€” data about the user and additional metadata.",
+              "Contains claims — data about the user and additional metadata.",
               "Common claims: userId, role, expiry time (exp).",
-              "âš ï¸ Payload is Base64-encoded, NOT encrypted â€” do not store sensitive data here.",
+              "š ï¸ Payload is Base64-encoded, NOT encrypted — do not store sensitive data here.",
             ],
             code: `{
   "userId": 101,
@@ -2043,7 +2043,7 @@ GET /students?page=1&limit=20`,
             content: [
               "Ensures the token has not been tampered with.",
               "Created by signing: Base64(Header) + '.' + Base64(Payload) using a secret key.",
-              "Only the server knows the secret key â€” so only the server can verify the signature.",
+              "Only the server knows the secret key — so only the server can verify the signature.",
             ],
             code: `HMACSHA256(
   Base64UrlEncode(header) + "." + Base64UrlEncode(payload),
@@ -2059,7 +2059,7 @@ GET /students?page=1&limit=20`,
             content: [
               "Header = Type of card (Student ID)",
               "Payload = Your name, roll number, department",
-              "Signature = Official university stamp â€” proves it's authentic",
+              "Signature = Official university stamp — proves it's authentic",
             ],
           },
         ],
@@ -2074,7 +2074,7 @@ GET /students?page=1&limit=20`,
           {
             title: "JWT Authentication Flow",
             content: [
-              "1. User logs in â€” sends credentials to the server.",
+              "1. User logs in — sends credentials to the server.",
               "2. Server verifies credentials against the database.",
               "3. Server generates a JWT and sends it back to the client.",
               "4. Client stores the token (LocalStorage or SessionStorage).",
@@ -2107,7 +2107,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...`,
             content: [
               "Server checks the signature using the secret key.",
               "Server checks the expiry (exp) claim.",
-              "If valid â†’ access granted. If invalid/expired â†’ 401 Unauthorized.",
+              "If valid †’ access granted. If invalid/expired †’ 401 Unauthorized.",
             ],
           },
         ],
@@ -2117,16 +2117,16 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...`,
         color: "indigo",
         subsections: [
           {
-            title: "âœ… Advantages",
+            title: "œ… Advantages",
             content: [
-              "Stateless â€” no server-side session storage needed.",
-              "Scalable â€” any server can verify the token without shared state.",
-              "Fast authentication â€” no database lookup required per request.",
+              "Stateless — no server-side session storage needed.",
+              "Scalable — any server can verify the token without shared state.",
+              "Fast authentication — no database lookup required per request.",
               "Works across domains and services (microservices, mobile apps).",
             ],
           },
           {
-            title: "âŒ Limitations",
+            title: "Œ Limitations",
             content: [
               "Cannot easily revoke a token before it expires.",
               "Token size can be large compared to a session cookie.",
@@ -2145,7 +2145,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...`,
           },
           {
             title: "2. Use Expiration Time",
-            content: ["Always set an exp claim â€” short-lived tokens (15â€“60 min) reduce the risk window if stolen."],
+            content: ["Always set an exp claim — short-lived tokens (15—60 min) reduce the risk window if stolen."],
           },
           {
             title: "3. Use a Strong Secret Key",
@@ -2153,7 +2153,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...`,
           },
           {
             title: "4. Avoid Storing Sensitive Data in Payload",
-            content: ["The payload is Base64-encoded, not encrypted â€” anyone can decode it. Never store passwords or PII."],
+            content: ["The payload is Base64-encoded, not encrypted — anyone can decode it. Never store passwords or PII."],
           },
           {
             title: "5. Use Refresh Tokens",
@@ -2164,9 +2164,9 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...`,
             table: {
               headers: ["Storage", "XSS Risk", "CSRF Risk", "Recommended Use"],
               rows: [
-                ["LocalStorage", "High â€” JS can read it", "None", "Simple SPAs with low security needs"],
-                ["HttpOnly Cookie", "None â€” JS cannot read", "Possible (use CSRF token)", "Recommended for production"],
-                ["SessionStorage", "High â€” JS can read it", "None", "Short-lived sessions only"],
+                ["LocalStorage", "High — JS can read it", "None", "Simple SPAs with low security needs"],
+                ["HttpOnly Cookie", "None — JS cannot read", "Possible (use CSRF token)", "Recommended for production"],
+                ["SessionStorage", "High — JS can read it", "None", "Short-lived sessions only"],
               ],
             },
           },
@@ -2185,7 +2185,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...`,
         },
         subsections: [
           {
-            title: "Node.js Example â€” Sign & Verify",
+            title: "Node.js Example — Sign & Verify",
             code: `const jwt = require('jsonwebtoken');
 const SECRET = 'your-strong-secret-key';
 
@@ -2205,7 +2205,7 @@ try {
 }`,
           },
           {
-            title: "Express Middleware â€” Protect Routes",
+            title: "Express Middleware — Protect Routes",
             code: `function authMiddleware(req, res, next) {
   const authHeader = req.headers.authorization;
   if (!authHeader || !authHeader.startsWith('Bearer ')) {
@@ -2229,16 +2229,16 @@ app.get('/api/profile', authMiddleware, (req, res) => {
       },
     ],
     quiz: [
-      { q: "What are the 3 parts of a JWT?", a: "Header, Payload, and Signature â€” separated by dots: Header.Payload.Signature" },
+      { q: "What are the 3 parts of a JWT?", a: "Header, Payload, and Signature — separated by dots: Header.Payload.Signature" },
       { q: "What is the difference between Authentication and Authorization?", a: "Authentication verifies who the user is (identity). Authorization determines what the user can access (permissions)." },
-      { q: "Why is JWT called stateless?", a: "Because the server does not store any session data â€” all necessary information is contained within the token itself." },
+      { q: "Why is JWT called stateless?", a: "Because the server does not store any session data — all necessary information is contained within the token itself." },
       { q: "What is stored in the JWT Payload?", a: "Claims (data) such as userId, role, and expiry time (exp). It is Base64-encoded, not encrypted." },
-      { q: "What happens if the JWT signature is invalid?", a: "The server rejects the token and returns a 401 Unauthorized response â€” the request is denied." },
-      { q: "Why should you NOT store sensitive data in the JWT payload?", a: "Because the payload is only Base64-encoded, not encrypted â€” anyone who has the token can decode and read it." },
+      { q: "What happens if the JWT signature is invalid?", a: "The server rejects the token and returns a 401 Unauthorized response — the request is denied." },
+      { q: "Why should you NOT store sensitive data in the JWT payload?", a: "Because the payload is only Base64-encoded, not encrypted — anyone who has the token can decode and read it." },
       { q: "What is the purpose of the exp claim in JWT?", a: "It sets the expiration time of the token. After this time, the token is considered invalid and the server will reject it." },
       { q: "What is the Authorization header format for sending a JWT?", a: "Authorization: Bearer <token>" },
-      { q: "What is a Refresh Token and why is it used?", a: "A long-lived token used to obtain new short-lived access tokens without requiring the user to log in again â€” used for long sessions." },
-      { q: "Name one advantage and one limitation of JWT.", a: "Advantage: Stateless and scalable â€” no server-side session storage needed. Limitation: Cannot easily revoke a token before it expires." },
+      { q: "What is a Refresh Token and why is it used?", a: "A long-lived token used to obtain new short-lived access tokens without requiring the user to log in again — used for long sessions." },
+      { q: "Name one advantage and one limitation of JWT.", a: "Advantage: Stateless and scalable — no server-side session storage needed. Limitation: Cannot easily revoke a token before it expires." },
     ],
   },
   {
@@ -2659,7 +2659,7 @@ app.get('/api/profile', authMiddleware, (req, res) => {
         ],
       },
       {
-        heading: "Full CRUD Implementation â€” Student Management",
+        heading: "Full CRUD Implementation — Student Management",
         color: "teal",
         subsections: [
           { title: "Step 1: Initialize Project", code: "npm init -y\nnpm install express" },
@@ -2677,12 +2677,12 @@ app.get('/api/profile', authMiddleware, (req, res) => {
       { q: "What is the endpoint to update book with id = 10?", a: "PUT /books/10" },
       { q: "Which HTTP method is used to delete a user?", a: "DELETE" },
       { q: "Is /getAllBooks a good REST endpoint? Why?", a: "No. REST uses nouns, not verbs. Correct endpoint: GET /books" },
-      { q: "Why are REST APIs stateless?", a: "Each request contains all necessary info â€” the server does not store session state, enabling scalability." },
+      { q: "Why are REST APIs stateless?", a: "Each request contains all necessary info — the server does not store session state, enabling scalability." },
       { q: "What status code is returned when a resource is created?", a: "201 Created" },
       { q: "What does REST stand for?", a: "Representational State Transfer" },
       { q: "Difference between PUT and POST?", a: "POST creates a new resource; PUT replaces/updates an existing one." },
       { q: "Design endpoints for a Teacher resource.", a: "GET /teachers, POST /teachers, PUT /teachers/{id}, DELETE /teachers/{id}" },
-      { q: "What happens if we do not use proper HTTP status codes?", a: "Clients cannot understand the result of their requests â€” error handling breaks down." },
+      { q: "What happens if we do not use proper HTTP status codes?", a: "Clients cannot understand the result of their requests — error handling breaks down." },
       { q: "Write the Express route to get a single student by ID with a 404 fallback.", a: "app.get('/api/students/:id', (req, res) => { const s = students.find(s => s.id == req.params.id); if (!s) return res.status(404).json({ message: 'Not found' }); res.json(s); });" },
     ],
   },
@@ -2763,7 +2763,7 @@ app.get('/api/profile', authMiddleware, (req, res) => {
       {
         heading: "Interfaces",
         color: "teal",
-        content: ["An interface defines a contract that a class must follow â€” it specifies what properties and methods a class must have, without providing any implementation.", "Use the implements keyword to apply an interface to a class."],
+        content: ["An interface defines a contract that a class must follow — it specifies what properties and methods a class must have, without providing any implementation.", "Use the implements keyword to apply an interface to a class."],
         example: {
           label: "Real-Life Analogy",
           points: ["A job contract defines responsibilities the employee must fulfil.", "A USB port standard defines the shape/pins any USB device must have."],
@@ -2797,15 +2797,15 @@ app.get('/api/profile', authMiddleware, (req, res) => {
     ],
     quiz: [
       { q: "What is a class in TypeScript?", a: "A class is a blueprint for creating objects. It bundles properties (data) and methods (behaviour) into a reusable unit." },
-      { q: "Which keyword is used for inheritance in TypeScript?", a: "extends â€” e.g., class Dog extends Animal { }" },
-      { q: "Which keyword is used to apply an interface to a class?", a: "implements â€” e.g., class Student implements Person { }" },
+      { q: "Which keyword is used for inheritance in TypeScript?", a: "extends — e.g., class Dog extends Animal { }" },
+      { q: "Which keyword is used to apply an interface to a class?", a: "implements — e.g., class Student implements Person { }" },
       { q: "What is the difference between public, private, and protected?", a: "public: accessible everywhere. private: accessible only inside the class. protected: accessible inside the class and its subclasses." },
       { q: "What is method overriding?", a: "When a child class provides its own implementation of a method that already exists in the parent class." },
       { q: "What is the difference between a class and an interface?", a: "A class has implementation (constructors, method bodies, object creation). An interface only defines a contract (property/method signatures) with no implementation." },
-      { q: "Can a class implement multiple interfaces?", a: "Yes â€” class Test implements A, B { }" },
+      { q: "Can a class implement multiple interfaces?", a: "Yes — class Test implements A, B { }" },
       { q: "What is encapsulation?", a: "Bundling data and methods inside a class and restricting direct access to internal state using private/protected modifiers." },
       { q: "What does super() do in a child class constructor?", a: "It calls the parent class constructor, allowing the child to initialise inherited properties before adding its own." },
-      { q: "When should you use an interface instead of a class?", a: "Use an interface when you need to define a structure/contract without implementation â€” to enforce that certain properties and methods exist across multiple unrelated classes." },
+      { q: "When should you use an interface instead of a class?", a: "Use an interface when you need to define a structure/contract without implementation — to enforce that certain properties and methods exist across multiple unrelated classes." },
     ],
   },
   {
@@ -2822,7 +2822,7 @@ app.get('/api/profile', authMiddleware, (req, res) => {
         color: "blue",
         content: [
           "Angular is a structured, opinionated framework for building large-scale Single Page Applications (SPAs) with strong conventions.",
-          "Framework vs library: Angular gives a full approach â€” routing, dependency injection, tooling, and more out of the box.",
+          "Framework vs library: Angular gives a full approach — routing, dependency injection, tooling, and more out of the box.",
           "Ideal for enterprise apps: consistent conventions make large codebases maintainable.",
           "Uses TypeScript and a component-based UI model.",
         ],
@@ -2850,7 +2850,7 @@ app.get('/api/profile', authMiddleware, (req, res) => {
         subsections: [
           { title: "Core Building Blocks", content: ["Angular CLI: creates boilerplate, builds, and serves the app.", "App Module (root): organizes declarations and imports.", "Component: TypeScript logic + HTML template + CSS styles.", "Template: the view layer with Angular-specific syntax."] },
           {
-            title: "Angular CLI â€” Key Commands",
+            title: "Angular CLI — Key Commands",
             table: {
               headers: ["Command", "Purpose"],
               rows: [
@@ -2891,7 +2891,7 @@ app.get('/api/profile', authMiddleware, (req, res) => {
       {
         heading: "Components & @Component Decorator",
         color: "orange",
-        content: ["A component is a reusable UI building block â€” it controls a view (template).", "Every Angular app has at least one component: the root AppComponent."],
+        content: ["A component is a reusable UI building block — it controls a view (template).", "Every Angular app has at least one component: the root AppComponent."],
         subsections: [
           {
             title: "@Component Metadata",
@@ -2905,10 +2905,10 @@ app.get('/api/profile', authMiddleware, (req, res) => {
         color: "pink",
         content: ["Data binding connects component data (TypeScript) with template UI (HTML).", "There are four types of data binding in Angular."],
         subsections: [
-          { title: "1. Interpolation â€” TS to HTML", code: "title = 'AWT Learning Hub';\n\n// template\n// <h1>{{ title }}</h1>" },
-          { title: "2. Property Binding â€” TS to DOM Property", code: "isDisabled = true;\n\n// template\n// <button [disabled]=\"isDisabled\">Submit</button>" },
-          { title: "3. Event Binding â€” DOM Event to TS", code: "save(): void { console.log('Saved!'); }\n\n// template\n// <button (click)=\"save()\">Save</button>" },
-          { title: "4. Two-Way Binding â€” TS and HTML", code: "userName = '';\n\n// Requires FormsModule\n// <input [(ngModel)]=\"userName\" placeholder=\"Enter name\">\n// <p>Hello, {{ userName }}!</p>" },
+          { title: "1. Interpolation — TS to HTML", code: "title = 'AWT Learning Hub';\n\n// template\n// <h1>{{ title }}</h1>" },
+          { title: "2. Property Binding — TS to DOM Property", code: "isDisabled = true;\n\n// template\n// <button [disabled]=\"isDisabled\">Submit</button>" },
+          { title: "3. Event Binding — DOM Event to TS", code: "save(): void { console.log('Saved!'); }\n\n// template\n// <button (click)=\"save()\">Save</button>" },
+          { title: "4. Two-Way Binding — TS and HTML", code: "userName = '';\n\n// Requires FormsModule\n// <input [(ngModel)]=\"userName\" placeholder=\"Enter name\">\n// <p>Hello, {{ userName }}!</p>" },
           {
             title: "Data Binding Comparison",
             table: {
@@ -2925,16 +2925,16 @@ app.get('/api/profile', authMiddleware, (req, res) => {
       },
     ],
     quiz: [
-      { q: "What is Angular best described as?", a: "A front-end framework for building Single Page Applications (SPAs) â€” opinionated, scalable, and TypeScript-first." },
-      { q: "Which decorator defines a component in Angular?", a: "@Component â€” it provides metadata: selector, templateUrl, and styleUrls." },
-      { q: "Where do you register components in an NgModule?", a: "In the declarations array â€” declarations are things the module owns (components, directives, pipes)." },
+      { q: "What is Angular best described as?", a: "A front-end framework for building Single Page Applications (SPAs) — opinionated, scalable, and TypeScript-first." },
+      { q: "Which decorator defines a component in Angular?", a: "@Component — it provides metadata: selector, templateUrl, and styleUrls." },
+      { q: "Where do you register components in an NgModule?", a: "In the declarations array — declarations are things the module owns (components, directives, pipes)." },
       { q: "What is the difference between declarations and imports in @NgModule?", a: "declarations: components/directives/pipes that belong to this module. imports: other modules whose exported features are needed (e.g., FormsModule, BrowserModule)." },
-      { q: "What are the four types of data binding in Angular?", a: "1. Interpolation {{ x }} â€” TS to HTML. 2. Property binding [prop]=\"x\" â€” TS to DOM. 3. Event binding (event)=\"fn()\" â€” DOM to TS. 4. Two-way binding [(ngModel)]=\"x\" â€” both directions." },
-      { q: "Which syntax is correct for event binding?", a: "(click)=\"save()\" â€” parentheses wrap the event name." },
-      { q: "What module must be imported to use [(ngModel)]?", a: "FormsModule â€” imported from @angular/forms and added to the imports array in @NgModule." },
-      { q: "What is the role of the selector in @Component?", a: "It defines the HTML tag name used to render the component â€” e.g., selector: 'app-user-card' means you use <app-user-card> in templates." },
-      { q: "What is the difference between interpolation and property binding?", a: "Interpolation {{ x }} outputs a string value into the HTML content. Property binding [prop]=\"x\" sets a DOM property to a TypeScript expression â€” needed for non-string values like booleans." },
-      { q: "What CLI command creates a new component?", a: "ng generate component component-name (or ng g c component-name) â€” it creates the TS, HTML, CSS files and auto-registers in AppModule." },
+      { q: "What are the four types of data binding in Angular?", a: "1. Interpolation {{ x }} — TS to HTML. 2. Property binding [prop]=\"x\" — TS to DOM. 3. Event binding (event)=\"fn()\" — DOM to TS. 4. Two-way binding [(ngModel)]=\"x\" — both directions." },
+      { q: "Which syntax is correct for event binding?", a: "(click)=\"save()\" — parentheses wrap the event name." },
+      { q: "What module must be imported to use [(ngModel)]?", a: "FormsModule — imported from @angular/forms and added to the imports array in @NgModule." },
+      { q: "What is the role of the selector in @Component?", a: "It defines the HTML tag name used to render the component — e.g., selector: 'app-user-card' means you use <app-user-card> in templates." },
+      { q: "What is the difference between interpolation and property binding?", a: "Interpolation {{ x }} outputs a string value into the HTML content. Property binding [prop]=\"x\" sets a DOM property to a TypeScript expression — needed for non-string values like booleans." },
+      { q: "What CLI command creates a new component?", a: "ng generate component component-name (or ng g c component-name) — it creates the TS, HTML, CSS files and auto-registers in AppModule." },
     ],
   },
   {
@@ -2952,7 +2952,7 @@ app.get('/api/profile', authMiddleware, (req, res) => {
         content: [
           "MEAN is a full-stack pipeline: React UI sends HTTP requests to Express/Node API, which processes them and stores/retrieves data from MongoDB.",
           "MEAN layers: UI (React), API (Express), Runtime (Node.js), Database (MongoDB).",
-          "REST is the standardized communication layer â€” URLs + HTTP methods + JSON.",
+          "REST is the standardized communication layer — URLs + HTTP methods + JSON.",
           "Client-server separation: the UI should never talk to the database directly.",
         ],
         example: {
@@ -2983,8 +2983,8 @@ app.get('/api/profile', authMiddleware, (req, res) => {
         color: "green",
         content: [
           "REST endpoints represent resources. Use HTTP methods to perform actions on them.",
-          "Resource naming: /api/tasks not /api/getTasks â€” always use nouns.",
-          "JSON request/response shape consistency is critical â€” frontend and backend must agree on key names.",
+          "Resource naming: /api/tasks not /api/getTasks — always use nouns.",
+          "JSON request/response shape consistency is critical — frontend and backend must agree on key names.",
         ],
         subsections: [
           {
@@ -3001,14 +3001,14 @@ app.get('/api/profile', authMiddleware, (req, res) => {
           },
           {
             title: "API Contract Example",
-            code: '// POST /api/tasks â€” request body:\n{ "title": "Buy milk", "done": false }\n\n// Response:\n{ "_id": "64abc...", "title": "Buy milk", "done": false }',
+            code: '// POST /api/tasks — request body:\n{ "title": "Buy milk", "done": false }\n\n// Response:\n{ "_id": "64abc...", "title": "Buy milk", "done": false }',
           },
           {
             title: "Common REST Mistakes",
             content: [
               "Using GET for create or update operations.",
-              "Returning raw database errors to the client â€” always send a clean error message.",
-              "Inconsistent _id vs id â€” MongoDB uses _id, be consistent across frontend and backend.",
+              "Returning raw database errors to the client — always send a clean error message.",
+              "Inconsistent _id vs id — MongoDB uses _id, be consistent across frontend and backend.",
             ],
           },
         ],
@@ -3018,7 +3018,7 @@ app.get('/api/profile', authMiddleware, (req, res) => {
         color: "purple",
         content: [
           "Express handles routing and middleware. Mongoose maps JavaScript objects to MongoDB documents.",
-          "Always add express.json() middleware â€” without it, req.body will be undefined.",
+          "Always add express.json() middleware — without it, req.body will be undefined.",
           "Enable CORS so the React dev server (port 3000) can call the Express API (port 5000).",
         ],
         subsections: [
@@ -3037,9 +3037,9 @@ app.get('/api/profile', authMiddleware, (req, res) => {
           {
             title: "Common Backend Mistakes",
             content: [
-              "Forgetting app.use(express.json()) â€” req.body becomes undefined.",
-              "Not enabling CORS â€” browser blocks all requests from the React dev server.",
-              "Not handling async errors â€” unhandled promise rejections crash the server.",
+              "Forgetting app.use(express.json()) — req.body becomes undefined.",
+              "Not enabling CORS — browser blocks all requests from the React dev server.",
+              "Not handling async errors — unhandled promise rejections crash the server.",
             ],
           },
         ],
@@ -3049,7 +3049,7 @@ app.get('/api/profile', authMiddleware, (req, res) => {
         color: "orange",
         content: [
           "React UI is built from components. Data flows down via props. Component internal data uses state.",
-          "Functional components are the modern standard â€” use hooks for state and lifecycle.",
+          "Functional components are the modern standard — use hooks for state and lifecycle.",
           "One-way data flow: Parent passes data to Child via props. Child cannot modify props.",
         ],
         subsections: [
@@ -3087,7 +3087,7 @@ app.get('/api/profile', authMiddleware, (req, res) => {
         color: "teal",
         content: [
           "Hooks replace class lifecycle methods. useEffect runs after render to handle side effects like API calls.",
-          "useEffect(() => { ... }, []) runs once on mount â€” equivalent to componentDidMount.",
+          "useEffect(() => { ... }, []) runs once on mount — equivalent to componentDidMount.",
           "The dependency array controls when the effect re-runs: [] = once, [id] = when id changes, no array = every render.",
         ],
         subsections: [
@@ -3106,9 +3106,9 @@ app.get('/api/profile', authMiddleware, (req, res) => {
           {
             title: "Common React + API Mistakes",
             content: [
-              "Updating state inside useEffect without a dependency array â€” causes infinite re-render loop.",
-              "Forgetting to await response.json() â€” you get a Promise object instead of data.",
-              "Not handling loading and error states â€” leads to blank screens on slow networks.",
+              "Updating state inside useEffect without a dependency array — causes infinite re-render loop.",
+              "Forgetting to await response.json() — you get a Promise object instead of data.",
+              "Not handling loading and error states — leads to blank screens on slow networks.",
             ],
           },
         ],
@@ -3118,7 +3118,7 @@ app.get('/api/profile', authMiddleware, (req, res) => {
         color: "pink",
         content: [
           "React does not update the real DOM for every state change. It builds a Virtual DOM, diffs it against the previous version, and updates only what changed.",
-          "Re-render does not mean a full page reload â€” only the changed components update.",
+          "Re-render does not mean a full page reload — only the changed components update.",
           "State update triggers reconciliation: React compares old and new virtual DOM trees.",
         ],
         subsections: [
@@ -3133,14 +3133,14 @@ app.get('/api/profile', authMiddleware, (req, res) => {
           },
           {
             title: "Why Keys Matter in Lists",
-            code: "// Without key â€” React cannot track which item changed:\ntasks.map(t => <TaskItem task={t} />)  // bad\n\n// With key â€” React efficiently updates only the changed item:\ntasks.map(t => <TaskItem key={t._id} task={t} />)  // good",
+            code: "// Without key — React cannot track which item changed:\ntasks.map(t => <TaskItem task={t} />)  // bad\n\n// With key — React efficiently updates only the changed item:\ntasks.map(t => <TaskItem key={t._id} task={t} />)  // good",
           },
           {
             title: "State Immutability",
             content: [
-              "Never mutate state directly â€” e.g., tasks.push(newTask) will not trigger a re-render.",
+              "Never mutate state directly — e.g., tasks.push(newTask) will not trigger a re-render.",
               "Always create a new array/object: setTasks([...tasks, newTask]).",
-              "React detects changes by reference â€” same reference = no re-render.",
+              "React detects changes by reference — same reference = no re-render.",
             ],
           },
         ],
@@ -3173,7 +3173,7 @@ app.get('/api/profile', authMiddleware, (req, res) => {
           {
             title: "Stale UI After POST",
             content: [
-              "Cause: After creating a task, the state is not updated â€” only the DB has the new item.",
+              "Cause: After creating a task, the state is not updated — only the DB has the new item.",
               "Fix: After a successful POST, either re-fetch all tasks or append the returned object to state.",
             ],
           },
@@ -3181,15 +3181,15 @@ app.get('/api/profile', authMiddleware, (req, res) => {
       },
     ],
     quiz: [
-      { q: "Which HTTP method is most appropriate to create a new resource in REST?", a: "POST â€” it creates a new resource and returns 201 Created." },
-      { q: "In Express, which middleware is required to read JSON body data?", a: "express.json() â€” added with app.use(express.json()). Without it, req.body is undefined." },
-      { q: "In React, changing which of the following triggers a re-render?", a: "State update â€” calling a setState setter triggers React to re-render the component." },
-      { q: "What does useEffect(() => { ... }, []) do?", a: "It runs the effect only once after the first render â€” equivalent to componentDidMount in class components." },
-      { q: "What does Virtual DOM primarily help React do?", a: "Minimize real DOM changes â€” React diffs the virtual DOM and only patches what actually changed, making updates efficient." },
-      { q: "What is the difference between props and state in React?", a: "Props are read-only inputs passed from parent to child. State is mutable data owned by the component itself â€” changing state triggers a re-render." },
+      { q: "Which HTTP method is most appropriate to create a new resource in REST?", a: "POST — it creates a new resource and returns 201 Created." },
+      { q: "In Express, which middleware is required to read JSON body data?", a: "express.json() — added with app.use(express.json()). Without it, req.body is undefined." },
+      { q: "In React, changing which of the following triggers a re-render?", a: "State update — calling a setState setter triggers React to re-render the component." },
+      { q: "What does useEffect(() => { ... }, []) do?", a: "It runs the effect only once after the first render — equivalent to componentDidMount in class components." },
+      { q: "What does Virtual DOM primarily help React do?", a: "Minimize real DOM changes — React diffs the virtual DOM and only patches what actually changed, making updates efficient." },
+      { q: "What is the difference between props and state in React?", a: "Props are read-only inputs passed from parent to child. State is mutable data owned by the component itself — changing state triggers a re-render." },
       { q: "Why do we need CORS in a React + Express setup?", a: "Browsers block cross-origin requests by default. CORS middleware on the Express server tells the browser to allow requests from the React dev server's origin." },
       { q: "What happens if you forget the key prop in a React list?", a: "React cannot efficiently track which items changed, causing incorrect DOM updates, UI glitches, and performance issues when items are added, removed, or reordered." },
-      { q: "Why does useEffect sometimes cause infinite loops?", a: "When a state variable is updated inside useEffect and that same variable is in the dependency array â€” the effect runs, updates state, which triggers the effect again, endlessly." },
+      { q: "Why does useEffect sometimes cause infinite loops?", a: "When a state variable is updated inside useEffect and that same variable is in the dependency array — the effect runs, updates state, which triggers the effect again, endlessly." },
       { q: "Write the REST routes for update task status and delete a task.", a: "Update: PATCH /api/tasks/:id with body { done: true }. Delete: DELETE /api/tasks/:id. Both return 200 OK on success." },
     ],
   },

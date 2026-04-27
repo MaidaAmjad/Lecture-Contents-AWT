@@ -1,18 +1,18 @@
 import { useState } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
-import HomePage from './pages/HomePage';
+import DashboardPage from './pages/DashboardPage';
 import LecturePage from './pages/LecturePage';
 import { useProgress } from './hooks/useProgress';
 
 function Layout() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [search, setSearch] = useState('');
-  const { completed, toggle, isCompleted } = useProgress();
+  const { completed, toggle } = useProgress();
   const location = useLocation();
 
   const isHome = location.pathname === '/';
-  const pageTitle = isHome ? 'All Lectures' : 'Lecture Details';
+  const pageTitle = isHome ? 'Dashboard' : 'Lecture Details';
 
   return (
     <div className="app-layout">
@@ -32,7 +32,7 @@ function Layout() {
           </div>
         </div>
         <Routes>
-          <Route path="/" element={<HomePage completed={completed} />} />
+          <Route path="/" element={<DashboardPage completed={completed} />} />
           <Route
             path="/lecture/:id"
             element={<LecturePage completed={completed} onToggle={toggle} />}

@@ -1,4 +1,4 @@
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useLocation } from 'react-router-dom';
 import { lectures } from '../data/lectures';
 
 const LECTURE_TITLES = {
@@ -17,7 +17,9 @@ const ALL_LECTURES = Array.from({ length: 15 }, (_, i) => {
 
 export default function Sidebar({ isOpen, onClose, completed, searchQuery, onSearch }) {
   const { id } = useParams();
+  const location = useLocation();
   const activeId = id ? parseInt(id) : null;
+  const isOnDashboard = location.pathname === '/';
 
   const filtered = ALL_LECTURES.filter((l) =>
     l.title.toLowerCase().includes(searchQuery.toLowerCase())
@@ -34,6 +36,13 @@ export default function Sidebar({ isOpen, onClose, completed, searchQuery, onSea
         <div className="sidebar-header">
           <div className="sidebar-logo">🎓 AWT Learning Hub</div>
           <div className="sidebar-sub">Advanced Web Technologies</div>
+          <Link
+            to="/"
+            className={`sidebar-dashboard-btn ${isOnDashboard ? 'active' : ''}`}
+            onClick={onClose}
+          >
+            <span>🏠</span> Go to Dashboard →
+          </Link>
         </div>
 
         <div className="sidebar-progress-wrap">
