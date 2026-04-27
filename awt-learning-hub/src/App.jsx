@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
 import DashboardPage from './pages/DashboardPage';
@@ -10,6 +10,11 @@ function Layout() {
   const [search, setSearch] = useState('');
   const { completed, toggle } = useProgress();
   const location = useLocation();
+
+  // Close sidebar on every route change (mobile nav)
+  useEffect(() => {
+    setSidebarOpen(false);
+  }, [location.pathname]);
 
   const isHome = location.pathname === '/';
   const pageTitle = isHome ? 'Dashboard' : 'Lecture Details';
@@ -25,7 +30,13 @@ function Layout() {
       />
       <div className="main-content">
         <div className="topbar">
-          <button className="menu-btn" onClick={() => setSidebarOpen(true)}>☰</button>
+          <button
+            className="menu-btn"
+            onClick={() => setSidebarOpen((prev) => !prev)}
+            aria-label="Toggle menu"
+          >
+            {sidebarOpen ? '✕' : '☰'}
+          </button>
           <div className="topbar-title">{pageTitle}</div>
           <div style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}>
             {completed.length} / 15 done
