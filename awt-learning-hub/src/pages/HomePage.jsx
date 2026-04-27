@@ -3,9 +3,7 @@ import { Link } from 'react-router-dom';
 import { lectures } from '../data/lectures';
 
 const LECTURE_TITLES = {
-  3: "Express.js Fundamentals",
-  4: "Middleware & Routing",
-  5: "MongoDB & Mongoose",
+  9: "Error Handling",
   6: "Authentication & JWT",
   9: "Error Handling",
   10: "File Uploads",
@@ -73,7 +71,7 @@ export default function HomePage({ completed }) {
             );
           }
           return (
-            <Link key={lec.id} to={`/lecture/${lec.id}`} className={`lecture-card ${isDone ? 'completed-card' : ''}`}>
+            <Link key={lec.id} to={`/lecture/${lec.id}`} className={`lecture-card ${isDone ? 'completed-card' : ''}`} data-color={lec.color || undefined}>
               {isDone && <div className="card-completed-badge">✓</div>}
               <div className="card-num">Lecture {lec.id}</div>
               <div className="card-title">{lec.title}</div>

@@ -2,9 +2,7 @@ import { Link, useParams } from 'react-router-dom';
 import { lectures } from '../data/lectures';
 
 const LECTURE_TITLES = {
-  3: "Express.js Fundamentals",
-  4: "Middleware & Routing",
-  5: "MongoDB & Mongoose",
+  9: "Error Handling",
   6: "Authentication & JWT",
   9: "Error Handling",
   10: "File Uploads",

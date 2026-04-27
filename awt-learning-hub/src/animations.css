@@ -109,12 +109,58 @@
 /* ── Card hover lift (enhanced) ── */
 .lecture-card {
   transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
-              box-shadow 0.25s ease,
+              box-shadow 0.3s ease,
               border-color 0.25s ease !important;
 }
 
 .lecture-card:hover {
-  transform: translateY(-6px) scale(1.01) !important;
+  transform: translateY(-8px) scale(1.015) !important;
+  box-shadow: 0 16px 48px rgba(99, 102, 241, 0.28),
+              0 4px 12px rgba(0, 0, 0, 0.08) !important;
+  border-color: var(--primary-light) !important;
+}
+
+/* ── Section card hover ── */
+.lecture-section {
+  animation: fadeInUp 0.5s ease both;
+  transition: box-shadow 0.25s ease, transform 0.25s ease !important;
+}
+
+.lecture-section:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 24px rgba(99, 102, 241, 0.12) !important;
+}
+
+/* ── Subsection card hover ── */
+.subsection {
+  transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease !important;
+}
+
+.subsection:hover {
+  background: rgba(99, 102, 241, 0.04) !important;
+  box-shadow: 0 2px 12px rgba(99, 102, 241, 0.08) !important;
+  transform: translateX(3px) !important;
+}
+
+/* ── Quiz item hover ── */
+.quiz-item {
+  transition: box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease !important;
+}
+
+.quiz-item:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 16px rgba(99, 102, 241, 0.14) !important;
+  border-color: var(--primary-light) !important;
+}
+
+/* ── Quiz question hover ── */
+.quiz-question {
+  transition: background 0.2s ease, color 0.2s ease !important;
+}
+
+.quiz-question:hover {
+  background: rgba(99, 102, 241, 0.06) !important;
+  color: var(--primary) !important;
 }
 
 /* ── Sidebar nav item slide ── */

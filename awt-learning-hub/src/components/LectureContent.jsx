@@ -52,7 +52,7 @@ function SubSection({ sub }) {
 
 function Section({ section }) {
   return (
-    <div className="lecture-section">
+    <div className="lecture-section" data-color={section.color || undefined}>
       <h2 className="section-heading">{section.heading}</h2>
 
       {section.content && (
@@ -118,7 +118,7 @@ export default function LectureContent({ lecture }) {
       ))}
 
       {lecture.quiz && lecture.quiz.length > 0 && (
-        <div className="quiz-section">
+        <div className="quiz-section" data-color={lecture.color || undefined}>
           <div className="quiz-title">🧠 Quiz & Review Questions</div>
           {lecture.quiz.map((q, i) => <QuizItem key={i} item={q} />)}
         </div>

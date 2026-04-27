@@ -524,6 +524,1361 @@ var str = JsonSerializer.Serialize(myObject);`,
     ],
   },
   {
+    id: 3,
+    title: "HTTP Server, URL Module & File System",
+    topic: "Node.js HTTP + URL + FS with Files & Streams",
+    duration: "2 Hours",
+    type: "Theory + Practical",
+    description: "Build an HTTP server from scratch, parse URLs, route requests, and serve files using streams.",
+    sections: [
+      {
+        heading: "Introduction & Overview",
+        content: [
+          "Node.js can act as a web server without any framework using the built-in http module.",
+          "The http module provides low-level primitives for building servers — you create a server, listen on a port, and handle requests with a callback.",
+          "For each incoming request, Node passes two objects: req (IncomingMessage) and res (ServerResponse).",
+          "In practice, most applications need routing (different behavior for different URLs) and often need to read/write files.",
+        ],
+        subsections: [
+          {
+            title: "Minimal HTTP Server",
+            code: `const http = require('http');
+
+const server = http.createServer((req, res) => {
+  res.statusCode = 200;
+  res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+  res.end('Hello from Node HTTP server!\\n');
+});
+
+server.listen(3000, () => {
+  console.log('Server running at http://localhost:3000/');
+});`,
+          },
+        ],
+      },
+      {
+        heading: "HTTP Request/Response Essentials",
+        content: [
+          "HTTP is a request/response protocol. Clients send a request (method + URL + headers + optional body).",
+          "The server returns a response (status code + headers + optional body).",
+        ],
+        subsections: [
+          {
+            title: "Methods, Status Codes & Headers",
+            content: [
+              "Methods: GET (read), POST (create), PUT/PATCH (update), DELETE (remove).",
+              "Status codes: 200 OK, 201 Created, 204 No Content, 400 Bad Request, 404 Not Found, 500 Internal Server Error.",
+              "Headers: metadata such as Content-Type, Content-Length, Cache-Control.",
+            ],
+          },
+          {
+            title: "Reading req Values in Node",
+            code: `// Inside createServer callback:
+console.log(req.method);        // e.g., 'GET'
+console.log(req.url);           // e.g., '/search?q=node'
+console.log(req.headers.host);  // e.g., 'localhost:3000'
+
+// Key point: req.url is NOT a full URL — just path + query.
+// To parse it safely, use the URL module with a base.`,
+          },
+        ],
+      },
+      {
+        heading: "URL Module: Parsing Path & Query",
+        content: [
+          "The URL class provides a reliable way to separate pathname, searchParams, and hash.",
+          "Manual string splitting (e.g., by '?' and '&') is error-prone, especially with URL encoding (spaces, special characters).",
+        ],
+        subsections: [
+          {
+            title: "URL Components",
+            table: {
+              headers: ["Component", "Example", "Description"],
+              rows: [
+                ["pathname", "/products/42", "The route path"],
+                ["searchParams", "?q=node&limit=10", "Query string key-value pairs"],
+                ["hash", "#section", "Fragment — usually client-side only"],
+              ],
+            },
+          },
+          {
+            title: "Recommended Parsing Pattern",
+            code: `const { URL } = require('url');
+
+function parseUrl(req) {
+  // Base is required because req.url is relative.
+  const base = \`http://\${req.headers.host}\`;
+  return new URL(req.url, base);
+}
+
+// Example:
+const u = parseUrl(req);
+console.log(u.pathname);              // '/search'
+console.log(u.searchParams.get('q')); // 'node'`,
+          },
+        ],
+      },
+      {
+        heading: "Routing from Scratch (No Framework)",
+        content: [
+          "Routing means: decide which handler function to run based on HTTP method and URL pathname.",
+          "A simple object-based pattern scales better than many if/else statements.",
+          "Frameworks like Express add middleware, parameterized routes, and better error handling — but understanding this low-level routing helps you debug real apps.",
+        ],
+        subsections: [
+          {
+            title: "Object-Based Router",
+            code: `const http = require('http');
+const { URL } = require('url');
+
+const routes = {
+  'GET /': (req, res) => {
+    res.writeHead(200, { 'Content-Type': 'text/plain; charset=utf-8' });
+    res.end('Home\\n');
+  },
+  'GET /api/time': (req, res) => {
+    const payload = { now: new Date().toISOString() };
+    res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+    res.end(JSON.stringify(payload));
+  }
+};
+
+function handler(req, res) {
+  const u = new URL(req.url, \`http://\${req.headers.host}\`);
+  const key = \`\${req.method} \${u.pathname}\`;
+  const fn = routes[key];
+  if (!fn) {
+    res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' });
+    return res.end('404 Not Found\\n');
+  }
+  fn(req, res, u);
+}
+
+http.createServer(handler).listen(3000);`,
+          },
+        ],
+      },
+      {
+        heading: "File System (fs): Files vs Streams",
+        content: [
+          "The fs module provides multiple styles of APIs for reading and writing files.",
+          "Rule of thumb: In a server, prefer asynchronous APIs so the event loop can handle other requests while waiting for disk I/O.",
+        ],
+        subsections: [
+          {
+            title: "fs API Styles",
+            table: {
+              headers: ["Style", "API", "Use Case"],
+              rows: [
+                ["Synchronous (blocking)", "fs.readFileSync, fs.writeFileSync", "Scripts, CLI tools — NOT servers"],
+                ["Callback-based async", "fs.readFile(path, cb)", "Classic Node.js pattern"],
+                ["Promise-based", "fs.promises.readFile(path)", "Modern async/await style"],
+                ["Stream-based", "fs.createReadStream(path)", "Large files — most efficient"],
+              ],
+            },
+          },
+          {
+            title: "Async File Read (Promise Style)",
+            code: `const fs = require('fs/promises');
+
+async function readTextFile(path) {
+  // returns a Buffer; convert to string if needed
+  const data = await fs.readFile(path, 'utf8');
+  return data;
+}`,
+          },
+        ],
+      },
+      {
+        heading: "Streams and pipe(): Efficient for Large Data",
+        content: [
+          "A stream processes data in chunks — ideal for large files (videos, logs, downloads) because it avoids loading the entire file into RAM.",
+          "In Node, an HTTP response is a writable stream, so we can stream a file directly to the client using pipe().",
+          "Backpressure: If the network is slow, pipe() coordinates flow so memory doesn't grow uncontrollably.",
+        ],
+        subsections: [
+          {
+            title: "Streaming a File to the Response",
+            code: `const fs = require('fs');
+
+function streamFileToResponse(filePath, res) {
+  const fileStream = fs.createReadStream(filePath);
+
+  fileStream.on('error', (err) => {
+    // Typical errors: ENOENT (file not found), EACCES (permission)
+    res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' });
+    res.end('File not found\\n');
+  });
+
+  res.writeHead(200, { 'Content-Type': 'application/octet-stream' });
+  fileStream.pipe(res); // handles chunking + backpressure
+}`,
+          },
+          {
+            title: "Common Pitfalls",
+            content: [
+              "Forgetting to end the response: always call res.end() (directly or via pipe).",
+              "Wrong Content-Type: browsers behave differently for text/html vs application/json.",
+              "Path traversal when serving files: do not allow '../' to escape your public directory.",
+              "Using readFile for huge files: can cause high memory use; prefer streams.",
+              "Not handling errors: always handle fs and stream errors to avoid crashes.",
+            ],
+          },
+        ],
+      },
+      {
+        heading: "Example A: JSON API + Query Parsing",
+        content: [
+          "Implement GET /api/echo?msg=hello returning JSON — demonstrates URL parsing and query parameters.",
+        ],
+        subsections: [
+          {
+            title: "Echo Endpoint",
+            code: `const http = require('http');
+const { URL } = require('url');
+
+http.createServer((req, res) => {
+  const u = new URL(req.url, \`http://\${req.headers.host}\`);
+
+  if (req.method === 'GET' && u.pathname === '/api/echo') {
+    const msg = u.searchParams.get('msg') ?? '';
+    const payload = { ok: true, msg };
+    res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+    return res.end(JSON.stringify(payload));
+  }
+
+  res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' });
+  res.end('Not Found\\n');
+}).listen(3000);`,
+          },
+        ],
+      },
+      {
+        heading: "Example B: Static File Server with Security",
+        content: [
+          "A real server often serves HTML/CSS/JS from a public/ folder.",
+          "Security: prevent path traversal — users must not be able to request /../secret.txt to escape the public folder.",
+          "Use path.normalize and confirm the final path stays inside the public directory.",
+        ],
+        subsections: [
+          {
+            title: "Full Static File Server",
+            code: `const http = require('http');
+const fs = require('fs');
+const path = require('path');
+const { URL } = require('url');
+
+const publicDir = path.join(__dirname, 'public');
+
+function contentType(filePath) {
+  const ext = path.extname(filePath).toLowerCase();
+  return ({
+    '.html': 'text/html; charset=utf-8',
+    '.css':  'text/css; charset=utf-8',
+    '.js':   'application/javascript; charset=utf-8',
+    '.json': 'application/json; charset=utf-8',
+    '.png':  'image/png',
+    '.jpg':  'image/jpeg',
+    '.svg':  'image/svg+xml'
+  })[ext] || 'application/octet-stream';
+}
+
+function safeJoin(base, target) {
+  const targetPath = path.normalize(path.join(base, target));
+  if (!targetPath.startsWith(base)) return null; // block traversal
+  return targetPath;
+}
+
+http.createServer((req, res) => {
+  const u = new URL(req.url, \`http://\${req.headers.host}\`);
+  let reqPath = decodeURIComponent(u.pathname);
+  if (reqPath === '/') reqPath = '/index.html';
+
+  const filePath = safeJoin(publicDir, reqPath);
+  if (!filePath) {
+    res.writeHead(400, { 'Content-Type': 'text/plain; charset=utf-8' });
+    return res.end('Bad Request\\n');
+  }
+
+  const stream = fs.createReadStream(filePath);
+  stream.on('error', () => {
+    res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' });
+    res.end('File Not Found\\n');
+  });
+  res.writeHead(200, { 'Content-Type': contentType(filePath) });
+  stream.pipe(res);
+}).listen(3000);`,
+          },
+        ],
+      },
+      {
+        heading: "Mini-Lab Tasks",
+        content: [
+          "Objective: Build a small server that (1) parses the URL query, (2) serves one JSON endpoint, and (3) streams files from a public folder.",
+        ],
+        subsections: [
+          {
+            title: "Task 1: Query Parser Endpoint (8 min)",
+            content: [
+              "Create GET /api/sum?a=5&b=7 and respond with JSON: {\"a\":5,\"b\":7,\"sum\":12}.",
+              "Validate inputs: if a or b is missing or not a number, return 400 with a helpful message.",
+            ],
+            code: `if (req.method === 'GET' && u.pathname === '/api/sum') {
+  const a = Number(u.searchParams.get('a'));
+  const b = Number(u.searchParams.get('b'));
+  if (!Number.isFinite(a) || !Number.isFinite(b)) {
+    res.writeHead(400, { 'Content-Type': 'application/json; charset=utf-8' });
+    return res.end(JSON.stringify({ ok: false, error: 'a and b must be numbers' }));
+  }
+  res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+  return res.end(JSON.stringify({ ok: true, a, b, sum: a + b }));
+}`,
+          },
+          {
+            title: "Task 2: Static File Streaming (8 min)",
+            content: [
+              "Create a public/ folder with index.html.",
+              "Map / to /index.html and stream the file using fs.createReadStream and pipe().",
+              "If file not found, respond with 404.",
+            ],
+          },
+          {
+            title: "Stretch Goals",
+            content: [
+              "Add a GET /download route that streams a large file with Content-Disposition for download.",
+              "Add basic logging: method, pathname, status code, and request time.",
+            ],
+          },
+        ],
+      },
+    ],
+    quiz: [
+      { q: "What are the two objects Node passes to the createServer callback?", a: "req (IncomingMessage) — contains method, headers, URL, and readable body stream. res (ServerResponse) — used to set status, headers, and write the response body." },
+      { q: "Why do we need a base URL when parsing req.url with the URL class?", a: "Because req.url is a relative path (e.g., '/search?q=node'), not a full URL. The URL constructor requires an absolute URL, so we supply a base like http://localhost:3000." },
+      { q: "What is the difference between fs.readFileSync and fs.createReadStream?", a: "readFileSync is blocking and loads the entire file into memory. createReadStream is non-blocking and processes data in chunks — much better for large files in a server." },
+      { q: "What does pipe() do when streaming a file to an HTTP response?", a: "It connects a readable stream (file) to a writable stream (HTTP response), automatically handling chunking and backpressure so memory doesn't grow uncontrollably." },
+      { q: "What is path traversal and how do you prevent it?", a: "Path traversal is when a user requests a path like /../secret.txt to escape the public directory. Prevent it by using path.normalize and checking that the resolved path still starts with the public directory base." },
+      { q: "Which fs API style is recommended in a production server and why?", a: "Asynchronous APIs (promise-based or stream-based) — they don't block the event loop, so the server can handle other requests while waiting for disk I/O." },
+      { q: "What HTTP status code should you return for a missing file?", a: "404 Not Found." },
+      { q: "Why is manual string splitting of URLs (by '?' and '&') error-prone?", a: "It doesn't handle URL encoding — spaces and special characters encoded as %20 or + won't be decoded correctly. The URL class handles this automatically." },
+      { q: "Write the routing key format used in the object-based router pattern.", a: "The key is a string combining method and pathname: e.g., 'GET /' or 'GET /api/time'. The handler is looked up with routes[`${req.method} ${u.pathname}`]." },
+      { q: "What Content-Type header should a JSON API response use?", a: "application/json; charset=utf-8" },
+    ],
+  },
+  {
+    id: 4,
+    title: "Express.js Fundamentals",
+    topic: "Express Framework: Middleware, Routing & Modular Architecture",
+    duration: "2 Hours",
+    type: "Theory",
+    description: "Express.js core concepts — middleware pipeline, routing strategies, express.Router(), and scalable application architecture with separation of concerns.",
+    sections: [
+      {
+        heading: "What is Express.js?",
+        content: [
+          "Express.js is a minimalist, flexible, and fast Node.js web application framework that provides a robust set of features for web and mobile applications.",
+          "It is often referred to as the 'de facto standard' framework for Node.js.",
+          "While Node.js provides core HTTP capabilities, building complex apps directly with the http module is tedious — manual URL parsing, body parsing, routing, and auth all need to be handled from scratch.",
+          "Express.js solves this by providing a structured, extensible approach.",
+        ],
+        subsections: [
+          {
+            title: "Key Characteristics",
+            table: {
+              headers: ["Characteristic", "Description"],
+              rows: [
+                ["Minimalist", "Thin layer over Node.js — doesn't obscure its features"],
+                ["Unopinionated", "No forced architecture or database choice — full flexibility"],
+                ["Performance", "Built on Node.js's fast V8 JavaScript engine"],
+                ["Extensible", "Highly extensible through middleware and routing"],
+              ],
+            },
+          },
+          {
+            title: "Minimal Express App",
+            code: `const express = require('express');
+const app = express();
+
+app.get('/', (req, res) => {
+  res.send('Hello from Express!');
+});
+
+app.listen(3000, () => {
+  console.log('Server running on port 3000');
+});`,
+          },
+        ],
+      },
+      {
+        heading: "Middleware — Deep Dive",
+        content: [
+          "Middleware functions have access to the request object (req), the response object (res), and the next middleware function in the application's request-response cycle.",
+          "They are executed in sequence, allowing you to intercept, process, and potentially modify req and res before they reach the final route handler.",
+        ],
+        subsections: [
+          {
+            title: "Key Responsibilities of Middleware",
+            content: [
+              "Execute any code.",
+              "Make changes to the request and response objects.",
+              "End the request-response cycle (e.g., by sending a response).",
+              "Call the next middleware in the stack via next() — if not called, the request hangs.",
+            ],
+          },
+          {
+            title: "Basic Middleware Structure",
+            code: `app.use((req, res, next) => {
+  console.log('Time:', Date.now(), '| Method:', req.method, '| URL:', req.url);
+  next(); // pass control to the next middleware
+});`,
+          },
+          {
+            title: "1. Application-Level Middleware",
+            content: [
+              "Bound to the app object using app.use() or app.METHOD().",
+              "Can be global (no path) or scoped to a specific path prefix.",
+            ],
+            code: `// Global — runs for every request
+app.use((req, res, next) => {
+  console.log('Global middleware');
+  next();
+});
+
+// Path-scoped — runs only for /users/*
+app.use('/users', (req, res, next) => {
+  console.log('Request to /users path');
+  next();
+});`,
+          },
+          {
+            title: "2. Router-Level Middleware",
+            content: ["Works the same as application-level middleware but is bound to an instance of express.Router()."],
+            code: `const router = express.Router();
+
+router.use((req, res, next) => {
+  console.log('Router-specific middleware');
+  next();
+});`,
+          },
+          {
+            title: "3. Built-in Middleware",
+            content: [
+              "express.json() — Parses incoming requests with JSON payloads. Makes data available on req.body.",
+              "express.urlencoded() — Parses URL-encoded request bodies (HTML form submissions).",
+              "express.static() — Serves static files (HTML, CSS, images) from a directory.",
+            ],
+            code: `app.use(express.json());           // parse JSON bodies
+app.use(express.urlencoded({ extended: true })); // parse form data
+app.use(express.static('public')); // serve static files`,
+          },
+          {
+            title: "4. Third-Party Middleware",
+            content: ["Installed via NPM for specific tasks."],
+            code: `const morgan = require('morgan');
+const cors = require('cors');
+
+app.use(morgan('combined')); // HTTP request logger
+app.use(cors());             // Enable Cross-Origin Resource Sharing`,
+          },
+          {
+            title: "5. Error-Handling Middleware",
+            content: [
+              "Special middleware with 4 arguments: (err, req, res, next).",
+              "Must be defined last in the middleware stack.",
+            ],
+            code: `app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ error: 'Something broke!', message: err.message });
+});`,
+          },
+          {
+            title: "Order of Execution",
+            content: [
+              "Middleware is executed in the order it is defined with app.use() or app.METHOD().",
+              "If a middleware does not call next(), the request-response cycle terminates — subsequent middleware and route handlers are never reached.",
+            ],
+          },
+        ],
+      },
+      {
+        heading: "Routing in Express",
+        content: [
+          "Routing determines how an application responds to a client request to a particular endpoint — a URI (path) and a specific HTTP method.",
+          "Basic syntax: app.METHOD(PATH, HANDLER)",
+        ],
+        subsections: [
+          {
+            title: "HTTP Methods",
+            table: {
+              headers: ["Method", "Purpose", "Example Path"],
+              rows: [
+                ["GET", "Retrieve data (read)", "/users"],
+                ["POST", "Submit data (create)", "/users"],
+                ["PUT", "Update data (replace)", "/users/:id"],
+                ["PATCH", "Partially update data", "/users/:id"],
+                ["DELETE", "Remove data", "/users/:id"],
+              ],
+            },
+          },
+          {
+            title: "Route Parameters",
+            content: [
+              "Used to capture dynamic values in the URL.",
+              "Defined using colons (e.g., /users/:userId). Values are available in req.params.",
+            ],
+            code: `app.get('/users/:userId/books/:bookId', (req, res) => {
+  console.log(req.params.userId); // '123' for /users/123/books/456
+  console.log(req.params.bookId); // '456'
+  res.send(\`User: \${req.params.userId}, Book: \${req.params.bookId}\`);
+});`,
+          },
+          {
+            title: "Query Parameters",
+            content: ["Accessed via req.query. Appear after ? in the URL."],
+            code: `// GET /search?q=express&page=2
+app.get('/search', (req, res) => {
+  const { q, page = 1 } = req.query;
+  res.json({ query: q, page: Number(page) });
+});`,
+          },
+          {
+            title: "Chained Route Handlers",
+            content: [
+              "Route handlers can be single functions or an array of functions (chained middleware for a specific route).",
+            ],
+            code: `const checkAuth = (req, res, next) => {
+  if (!req.headers.authorization) {
+    return res.status(401).send('Unauthorized');
+  }
+  next();
+};
+
+const getUser = (req, res) => {
+  res.send('User profile data');
+};
+
+// checkAuth runs first, then getUser
+app.get('/profile', checkAuth, getUser);`,
+          },
+          {
+            title: "Chaining Multiple Middleware on a Route",
+            code: `app.post('/data',
+  express.json(),                    // 1. parse JSON body
+  (req, res, next) => {              // 2. validate
+    if (!req.body.name) {
+      return res.status(400).send('Name is required');
+    }
+    next();
+  },
+  (req, res) => {                    // 3. process & respond
+    res.status(201).send(\`Data received for \${req.body.name}\`);
+  }
+);`,
+          },
+        ],
+      },
+      {
+        heading: "Modular Routing with express.Router()",
+        content: [
+          "As an application grows, app.js becomes cluttered with numerous route definitions — hard to manage, especially with multiple resource types (users, products, orders).",
+          "express.Router() creates modular, mountable route handlers. A Router instance is a complete middleware and routing system.",
+          "You create separate router files for different API resources, then mount them onto specific paths in app.js.",
+        ],
+        subsections: [
+          {
+            title: "Creating a Router — routes/users.js",
+            code: `// routes/users.js
+const express = require('express');
+const router = express.Router();
+
+router.get('/', (req, res) => {
+  res.send('Get all users');
+});
+
+router.get('/:id', (req, res) => {
+  res.send(\`Get user with ID: \${req.params.id}\`);
+});
+
+router.post('/', (req, res) => {
+  res.status(201).send('Create a new user');
+});
+
+router.put('/:id', (req, res) => {
+  res.send(\`Update user \${req.params.id}\`);
+});
+
+router.delete('/:id', (req, res) => {
+  res.send(\`Delete user \${req.params.id}\`);
+});
+
+module.exports = router;`,
+          },
+          {
+            title: "Mounting the Router — app.js",
+            code: `// app.js
+const express = require('express');
+const app = express();
+
+app.use(express.json()); // global middleware
+
+const usersRouter = require('./routes/users');
+app.use('/api/users', usersRouter); // mount at /api/users
+
+// Now:
+// GET  /api/users       → router.get('/')
+// GET  /api/users/123   → router.get('/:id')
+// POST /api/users       → router.post('/')
+
+app.listen(3000, () => console.log('Server on port 3000'));`,
+          },
+          {
+            title: "Router-Level Auth Middleware",
+            content: ["Middleware applied inside a router affects only that router's routes."],
+            code: `// routes/admin.js
+const express = require('express');
+const router = express.Router();
+
+const authMiddleware = (req, res, next) => {
+  if (!req.headers.authorization) {
+    return res.status(401).json({ error: 'Unauthorized' });
+  }
+  next();
+};
+
+router.use(authMiddleware); // applies to ALL routes in this router
+
+router.get('/dashboard', (req, res) => {
+  res.send('Admin Dashboard');
+});
+
+module.exports = router;
+
+// app.js
+app.use('/admin', require('./routes/admin'));`,
+          },
+          {
+            title: "Benefits of Modular Routing",
+            table: {
+              headers: ["Benefit", "Description"],
+              rows: [
+                ["Organization", "Keeps related routes together, improving readability"],
+                ["Maintainability", "Easier to update features without affecting other parts"],
+                ["Reusability", "Routers can be reused across different apps"],
+                ["Scalability", "Facilitates collaboration in larger teams"],
+              ],
+            },
+          },
+        ],
+      },
+      {
+        heading: "Application Architecture & Request Flow",
+        content: [
+          "A well-structured application is crucial for maintainability and scalability.",
+          "Express is unopinionated, but common patterns emerge — often resembling MVC (Model-View-Controller) or a layered architecture.",
+        ],
+        subsections: [
+          {
+            title: "Recommended Directory Structure",
+            code: `project/
+├── app.js              # Entry point — init Express, global middleware, mount routers
+├── config/             # DB config, environment settings
+├── routes/             # Route definitions (use express.Router)
+│   ├── users.js
+│   └── products.js
+├── controllers/        # Business logic — handle req/res, call models
+│   ├── usersController.js
+│   └── productsController.js
+├── models/             # Database schemas (e.g., Mongoose)
+│   ├── User.js
+│   └── Product.js
+├── middleware/         # Reusable middleware
+│   ├── auth.js
+│   └── logger.js
+└── public/             # Static assets (HTML, CSS, JS, images)`,
+          },
+          {
+            title: "Separation of Concerns",
+            table: {
+              headers: ["Layer", "Responsibility"],
+              rows: [
+                ["app.js", "Initialize Express, connect DB, set global middleware, mount routers"],
+                ["routes/", "Define API endpoints, link to controller functions"],
+                ["controllers/", "Handle specific requests, interact with models"],
+                ["models/", "Define data structure, interact with database"],
+                ["middleware/", "Reusable functions (auth, logging, validation)"],
+                ["config/", "Environment-dependent configuration"],
+              ],
+            },
+          },
+          {
+            title: "Request Flow: Client → Server",
+            content: [
+              "1. Client sends HTTP request — e.g., GET /api/users/123",
+              "2. app.js receives the request.",
+              "3. Global middleware runs — express.json(), logging middleware.",
+              "4. app.js matches /api/users and forwards to usersRouter.",
+              "5. Router-level middleware runs — e.g., authentication check.",
+              "6. usersRouter matches /:id and calls usersController.getUserById.",
+              "7. Controller interacts with the User model to fetch data from DB.",
+              "8. Model returns data to the controller.",
+              "9. Controller sends response via res.json() or res.send().",
+              "10. Error-handling middleware catches any errors and sends an error response.",
+            ],
+          },
+          {
+            title: "Global vs Route-Specific Middleware",
+            code: `// app.js — Global middleware (runs for ALL requests)
+app.use(express.json());
+app.use((req, res, next) => {
+  console.log(\`[\${new Date().toISOString()}] \${req.method} \${req.url}\`);
+  next();
+});
+
+// Route-specific middleware (runs only for /admin)
+const authMiddleware = (req, res, next) => {
+  if (!req.headers.authorization) {
+    return res.status(401).send('Unauthorized');
+  }
+  next();
+};
+
+app.get('/admin', authMiddleware, (req, res) => {
+  res.send('Admin dashboard');
+});`,
+          },
+        ],
+      },
+    ],
+    quiz: [
+      { q: "What is Express.js and why use it over plain Node.js http module?", a: "Express.js is a minimalist Node.js web framework. It simplifies URL parsing, body parsing, routing, and middleware integration — tasks that require manual effort with the raw http module." },
+      { q: "What are the 5 types of middleware in Express?", a: "Application-level, Router-level, Built-in (express.json, express.static, express.urlencoded), Third-party (morgan, cors), and Error-handling middleware." },
+      { q: "What happens if next() is not called in a middleware?", a: "The request-response cycle terminates — the next middleware or route handler is never executed, and the client hangs waiting for a response." },
+      { q: "What is the signature of error-handling middleware and where must it be placed?", a: "It takes 4 arguments: (err, req, res, next). It must be defined last in the middleware stack, after all routes." },
+      { q: "What is the difference between app.use() and app.get()?", a: "app.use() applies middleware to all HTTP methods and optionally a path prefix. app.get() defines a handler specifically for GET requests on an exact path." },
+      { q: "How do you access route parameters like /users/:id?", a: "Via req.params.id inside the route handler." },
+      { q: "What problem does express.Router() solve?", a: "As apps grow, app.js becomes cluttered with all routes. Router() lets you split routes into separate files by resource (users, products) and mount them at specific base paths." },
+      { q: "What does app.use('/api/users', usersRouter) do?", a: "It mounts the usersRouter at the /api/users base path. All routes defined in usersRouter are now prefixed with /api/users." },
+      { q: "What is the role of controllers/ in Express application architecture?", a: "Controllers contain the business logic for handling specific requests — they receive req/res from routes and interact with models to fetch or modify data." },
+      { q: "Describe the full request flow for GET /api/users/123 in a well-structured Express app.", a: "1. app.js receives request → 2. Global middleware runs → 3. Matched to /api/users, forwarded to usersRouter → 4. Router middleware (auth) runs → 5. /:id matched, calls getUserById controller → 6. Controller queries User model → 7. Model returns data → 8. Controller sends res.json() → 9. Error middleware catches any errors." },
+    ],
+  },
+  {
+    id: 5,
+    title: "Express.js Architecture Concepts",
+    topic: "Middleware, Routing, and Routers in Express",
+    duration: "2 Hours",
+    type: "Theory",
+    description: "Express.js framework fundamentals — middleware types, routing, Express Router, and scalable application architecture with MVC.",
+    sections: [
+      {
+        heading: "What is Express.js?",
+        content: [
+          "Express.js is a minimal and flexible web framework built on top of Node.js.",
+          "It helps developers build web servers, create APIs, and handle HTTP requests and responses.",
+        ],
+        example: {
+          label: "Real-Life Analogy: Restaurant Manager",
+          points: [
+            "Customers = Client (Browser/Postman)",
+            "Orders = Requests",
+            "Kitchen = Server logic",
+            "Waiter = Middleware",
+            "Manager = Express",
+          ],
+        },
+        subsections: [
+          {
+            title: "Basic Express App Structure",
+            code: `const express = require('express');
+const app = express();
+
+app.get('/', (req, res) => {
+  res.send("Welcome to Express!");
+});
+
+app.listen(3000, () => {
+  console.log("Server running on port 3000");
+});`,
+          },
+          {
+            title: "Key Components",
+            content: [
+              "app → Application object",
+              "app.get() → Route definition",
+              "req → Request object",
+              "res → Response object",
+              "app.listen() → Starts the server",
+            ],
+          },
+        ],
+      },
+      {
+        heading: "Middleware Concepts",
+        content: [
+          "Middleware is a function that executes after receiving a request and before sending a response.",
+          "Middleware functions have access to req, res, and next().",
+          "Official definition: Middleware functions are functions that have access to the request object, response object, and the next middleware function in the application's request-response cycle.",
+        ],
+        example: {
+          label: "Real-Life Analogy: Airport Security",
+          points: [
+            "1. Passenger arrives → Request",
+            "2. Security checks passport → Middleware 1",
+            "3. Baggage scan → Middleware 2",
+            "4. Boarding gate → Route handler",
+          ],
+        },
+        subsections: [
+          {
+            title: "1. Application-Level Middleware",
+            content: ["Attached directly to the app object using app.use(). Runs for every request."],
+            code: `app.use((req, res, next) => {
+  console.log("Request received:", req.method, req.url);
+  next(); // pass control to next middleware
+});`,
+          },
+          {
+            title: "2. Router-Level Middleware",
+            content: ["Used inside Router objects — scoped to specific route groups."],
+          },
+          {
+            title: "3. Built-in Middleware",
+            content: [
+              "express.json() → Parses incoming JSON request bodies.",
+              "express.static() → Serves static files (HTML, CSS, images) from a folder.",
+            ],
+          },
+          {
+            title: "4. Error-Handling Middleware",
+            content: ["Takes 4 arguments: (err, req, res, next). Must be defined last."],
+            code: `app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send("Something broke!");
+});`,
+          },
+          {
+            title: "Why Middleware is Powerful",
+            content: [
+              "Authentication — verify tokens before reaching route handlers.",
+              "Logging — record every request for debugging and monitoring.",
+              "Data validation — reject malformed requests early.",
+              "Error handling — centralize error responses in one place.",
+            ],
+          },
+        ],
+      },
+      {
+        heading: "Routing in Express",
+        content: [
+          "Routing refers to how an application responds to client requests for a specific endpoint.",
+          "Think of routing like Google Maps — different routes lead to different destinations, and the URL determines which function runs.",
+        ],
+        subsections: [
+          {
+            title: "Route Methods",
+            table: {
+              headers: ["Method", "Purpose", "Example"],
+              rows: [
+                ["GET", "Retrieve data", "app.get('/users', handler)"],
+                ["POST", "Create data", "app.post('/users', handler)"],
+                ["PUT", "Update data", "app.put('/users/:id', handler)"],
+                ["DELETE", "Delete data", "app.delete('/users/:id', handler)"],
+              ],
+            },
+          },
+          {
+            title: "Basic Route Example",
+            code: `app.get('/about', (req, res) => {
+  res.send("About Page");
+});
+
+app.post('/login', (req, res) => {
+  const { username, password } = req.body;
+  res.json({ message: "Login received", username });
+});`,
+          },
+          {
+            title: "Route Parameters",
+            content: [
+              "Route parameters are named URL segments used to capture values at specific positions.",
+              "Accessed via req.params. Example: /user/5 → req.params.id = '5'",
+            ],
+            code: `app.get('/user/:id', (req, res) => {
+  res.send(\`User ID: \${req.params.id}\`);
+});
+
+// Multiple params
+app.get('/posts/:year/:month', (req, res) => {
+  const { year, month } = req.params;
+  res.json({ year, month });
+});`,
+          },
+          {
+            title: "Query Parameters",
+            content: ["Query strings come after ? in the URL. Accessed via req.query."],
+            code: `// GET /search?q=express&limit=10
+app.get('/search', (req, res) => {
+  const { q, limit } = req.query;
+  res.json({ query: q, limit });
+});`,
+          },
+        ],
+      },
+      {
+        heading: "Express Router",
+        content: [
+          "Router allows us to separate routes into different files and organize large applications.",
+          "It makes applications scalable and clean.",
+          "Imagine a project with 50 routes and multiple modules — putting everything in one file becomes messy and unmanageable.",
+        ],
+        example: {
+          label: "Real-Life Analogy: University Departments",
+          points: [
+            "Admission Office → /admissions",
+            "Accounts Office → /accounts",
+            "Examination Office → /exams",
+            "Each department handles its own tasks independently.",
+          ],
+        },
+        subsections: [
+          {
+            title: "Creating a Router — routes/user.js",
+            code: `const express = require('express');
+const router = express.Router();
+
+// GET /users
+router.get('/', (req, res) => {
+  res.send("All Users");
+});
+
+// GET /users/:id
+router.get('/:id', (req, res) => {
+  res.send(\`Single User: \${req.params.id}\`);
+});
+
+// POST /users
+router.post('/', (req, res) => {
+  res.status(201).json({ message: "User created", data: req.body });
+});
+
+module.exports = router;`,
+          },
+          {
+            title: "Mounting the Router — app.js",
+            code: `const express = require('express');
+const app = express();
+app.use(express.json());
+
+const userRoutes = require('./routes/user');
+app.use('/users', userRoutes);
+// Now: GET /users, GET /users/10, POST /users
+
+app.listen(3000, () => console.log("Server on port 3000"));`,
+          },
+        ],
+      },
+      {
+        heading: "Application Architecture & MVC",
+        content: [
+          "Express applications often follow the MVC (Model-View-Controller) pattern.",
+          "Model → Database logic. View → Frontend (EJS/React etc.). Controller → Business logic.",
+          "Middleware order matters — Express executes middleware in the order it is defined.",
+        ],
+        subsections: [
+          {
+            title: "Recommended Folder Structure",
+            code: `project/
+├── app.js
+├── routes/
+│   ├── user.js
+│   └── product.js
+├── middleware/
+│   ├── auth.js
+│   └── logger.js
+├── controllers/
+│   └── userController.js
+└── models/
+    └── User.js`,
+          },
+          {
+            title: "Controllers — Separating Business Logic",
+            content: [
+              "Instead of writing handler logic inline in routes, move it to controller files.",
+              "This improves readability, maintainability, and supports scaling.",
+            ],
+            code: `// controllers/userController.js
+exports.getUsers = (req, res) => {
+  res.json([{ id: 1, name: "Ali" }]);
+};
+
+// routes/user.js
+const userController = require('../controllers/userController');
+router.get('/', userController.getUsers); // clean!`,
+          },
+          {
+            title: "Middleware Order Matters",
+            content: [
+              "Express executes middleware in the order it is registered.",
+              "If auth middleware fails, the route handler never executes.",
+            ],
+            code: `app.use(logger);       // runs first — logs every request
+app.use(auth);         // runs second — blocks unauthorized requests
+app.use('/users', userRoutes); // only reached if auth passes`,
+          },
+          {
+            title: "Custom Auth Middleware Example",
+            code: `// middleware/auth.js
+module.exports = (req, res, next) => {
+  const token = req.headers['authorization'];
+  if (!token) {
+    return res.status(401).json({ error: "Unauthorized" });
+  }
+  // verify token logic here...
+  next(); // token valid — proceed
+};`,
+          },
+        ],
+      },
+    ],
+    quiz: [
+      { q: "What is Express.js?", a: "A minimal and flexible web framework built on top of Node.js for building web servers and APIs." },
+      { q: "What is middleware in Express?", a: "A function that executes after receiving a request and before sending a response. It has access to req, res, and next()." },
+      { q: "What is the difference between app.use() and app.get()?", a: "app.use() applies middleware to all HTTP methods and optionally a path prefix. app.get() defines a route handler specifically for GET requests on an exact path." },
+      { q: "What happens if next() is not called in a middleware?", a: "The request-response cycle is stuck — the next middleware or route handler never executes, and the client hangs waiting for a response." },
+      { q: "Why is middleware order important in Express?", a: "Express executes middleware in the order it is registered. If auth middleware is placed before routes, unauthorized requests are blocked before reaching any route handler." },
+      { q: "What are the 4 types of middleware in Express?", a: "Application-level, Router-level, Built-in (express.json, express.static), and Error-handling middleware." },
+      { q: "Why use Express Router instead of defining all routes in app.js?", a: "Router separates routes into different files, making large applications organized, scalable, and maintainable." },
+      { q: "What does express.json() do?", a: "It is built-in middleware that parses incoming requests with JSON payloads and makes the data available on req.body." },
+      { q: "What is the MVC pattern in Express?", a: "Model = database logic, View = frontend (EJS/React), Controller = business logic. It separates concerns for cleaner, more maintainable code." },
+      { q: "How do you access a route parameter like /users/:id?", a: "Via req.params.id inside the route handler." },
+    ],
+  },
+  {
+    id: 6,
+    title: "Web App Dev & REST Principles",
+    topic: "View Generators, Bootstrap & REST Architecture",
+    duration: "2 Hours",
+    type: "Theory",
+    description: "View generators & scaffolding, Bootstrap responsive UI, REST statelessness, idempotency, HTTP method selection, and URI design.",
+    color: "teal",
+    sections: [
+      {
+        heading: "View Generators & MVC Architecture",
+        color: "purple",
+        content: [
+          "In web development, a View is the part of an application responsible for displaying data to users.",
+          "It belongs to the MVC Architecture — Model handles data, View displays data, Controller controls logic & flow.",
+          "Example: Model → Student database | View → Student list page | Controller → Fetches students and sends to View.",
+        ],
+        subsections: [
+          {
+            title: "What is a View Generator?",
+            content: [
+              "A View Generator automatically creates UI files (HTML templates or views) based on models.",
+              "It saves time and reduces manual coding — this process is often called Scaffolding.",
+            ],
+          },
+          {
+            title: "Scaffolding Example — University Management System",
+            content: [
+              "You define a Student model: id, name, email, department.",
+              "The view generator automatically creates: List View, Create Form, Edit Page, Delete Confirmation page.",
+            ],
+            code: `// Student model definition
+Student:
+  - id
+  - name
+  - email
+  - department
+
+// Auto-generated views (scaffolding):
+→ GET  /students        → List View
+→ GET  /students/new    → Create Form
+→ GET  /students/:id/edit → Edit Page
+→ DELETE /students/:id  → Delete Confirmation`,
+          },
+          {
+            title: "Frameworks with View Generators",
+            table: {
+              headers: ["Framework", "Language", "Generator Command"],
+              rows: [
+                ["Django", "Python", "python manage.py startapp"],
+                ["Laravel", "PHP", "php artisan make:model"],
+                ["Ruby on Rails", "Ruby", "rails generate scaffold"],
+                ["ASP.NET Core", "C#", "dotnet aspnet-codegenerator"],
+              ],
+            },
+          },
+          {
+            title: "Advantages of View Generators",
+            content: [
+              "Fast development — generate full CRUD views in seconds.",
+              "Reduces human errors — consistent, tested templates.",
+              "Consistent design — uniform UI across all views.",
+              "Easy maintenance — update the model, regenerate views.",
+            ],
+          },
+        ],
+      },
+      {
+        heading: "Bootstrap — Responsive UI Framework",
+        color: "blue",
+        content: [
+          "Bootstrap is a front-end framework used to design responsive websites quickly.",
+          "It provides CSS styles, components, a 12-column grid system, and pre-designed UI elements.",
+        ],
+        subsections: [
+          {
+            title: "Without vs With Bootstrap",
+            table: {
+              headers: ["Without Bootstrap", "With Bootstrap"],
+              rows: [
+                ["Write full CSS manually", "Professional UI in minutes"],
+                ["Time consuming", "Mobile responsive by default"],
+                ["Cross-browser issues", "Pre-built, tested components"],
+                ["Inconsistent styling", "Consistent design system"],
+              ],
+            },
+          },
+          {
+            title: "Bootstrap Grid System",
+            content: [
+              "Bootstrap uses a 12-column layout system.",
+              "6 columns → Half width | 4 columns → One-third | 12 columns → Full width.",
+              "Breakpoints: xs (<576px), sm (≥576px), md (≥768px), lg (≥992px), xl (≥1200px).",
+            ],
+            code: `<!-- 2-column layout -->
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">Left Column</div>
+    <div class="col-md-6">Right Column</div>
+  </div>
+</div>
+
+<!-- 3-column layout -->
+<div class="row">
+  <div class="col-md-4">Column 1</div>
+  <div class="col-md-4">Column 2</div>
+  <div class="col-md-4">Column 3</div>
+</div>`,
+          },
+          {
+            title: "Common Bootstrap Components",
+            table: {
+              headers: ["Component", "Usage", "Class Example"],
+              rows: [
+                ["Buttons", "Actions & CTAs", "btn btn-primary"],
+                ["Cards", "Content containers", "card card-body"],
+                ["Navbar", "Navigation bar", "navbar navbar-expand-lg"],
+                ["Forms", "Input groups", "form-control form-label"],
+                ["Tables", "Data display", "table table-striped"],
+                ["Alerts", "Notifications", "alert alert-success"],
+                ["Modals", "Popup dialogs", "modal modal-dialog"],
+              ],
+            },
+          },
+          {
+            title: "Adding Bootstrap to an Express/EJS App",
+            code: `<!-- In your HTML <head> — CDN method -->
+<link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+
+<!-- Before </body> — JS bundle -->
+<script
+  src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js">
+</script>
+
+<!-- Or via npm -->
+npm install bootstrap
+
+// In app.js — serve Bootstrap from node_modules
+app.use('/css', express.static('node_modules/bootstrap/dist/css'));`,
+          },
+        ],
+      },
+      {
+        heading: "REST Architecture Principles",
+        color: "green",
+        content: [
+          "REST stands for Representational State Transfer — an architectural style for designing web services.",
+          "Introduced by Roy Fielding in his doctoral dissertation (2000).",
+        ],
+        subsections: [
+          {
+            title: "The 6 REST Constraints",
+            table: {
+              headers: ["Constraint", "Description"],
+              rows: [
+                ["Client-Server", "Frontend and backend are separated — independent evolution"],
+                ["Stateless", "Each request contains all necessary info — server stores no session"],
+                ["Cacheable", "Responses can be cached to improve performance"],
+                ["Uniform Interface", "Consistent resource identification and manipulation via URIs"],
+                ["Layered System", "Client can't tell if connected directly to server or intermediary"],
+                ["Code on Demand (optional)", "Server can send executable code to client"],
+              ],
+            },
+          },
+          {
+            title: "Statelessness — Deep Dive",
+            content: [
+              "Each request from client to server must contain ALL necessary information.",
+              "Server does NOT remember previous requests — no session stored server-side.",
+              "Benefits: scalability (any server can handle any request), reliability, simplicity.",
+            ],
+            example: {
+              label: "Real-Life Analogy: ATM Machine",
+              points: [
+                "Every transaction requires card + PIN — machine doesn't remember previous customer.",
+                "In Web API: each request includes authentication token + required parameters.",
+                "Stateful (bad): Server remembers 'user logged in' between requests.",
+                "Stateless (good): Every request carries a JWT token to prove identity.",
+              ],
+            },
+          },
+          {
+            title: "Idempotency",
+            content: [
+              "An operation is idempotent if performing it multiple times gives the same result.",
+              "Idempotent methods: GET, PUT, DELETE.",
+              "NOT idempotent: POST — each call creates a new resource.",
+            ],
+            table: {
+              headers: ["Method", "Idempotent?", "Reason"],
+              rows: [
+                ["GET", "Yes", "Reading data never changes state"],
+                ["PUT", "Yes", "Replacing a resource with same data = same result"],
+                ["DELETE", "Yes", "Deleting an already-deleted resource = still deleted"],
+                ["POST", "No", "Each call creates a new resource — different result each time"],
+                ["PATCH", "No*", "Depends on implementation — partial updates may not be idempotent"],
+              ],
+            },
+          },
+        ],
+      },
+      {
+        heading: "HTTP Method Selection",
+        color: "orange",
+        content: [
+          "REST uses HTTP methods semantically — each method has a specific, well-defined purpose.",
+          "Choosing the correct method makes your API predictable and self-documenting.",
+        ],
+        subsections: [
+          {
+            title: "HTTP Methods Reference",
+            table: {
+              headers: ["Method", "Purpose", "Idempotent", "Safe", "Example"],
+              rows: [
+                ["GET", "Retrieve data", "Yes", "Yes", "GET /products"],
+                ["POST", "Create new resource", "No", "No", "POST /products"],
+                ["PUT", "Replace entire resource", "Yes", "No", "PUT /products/1"],
+                ["PATCH", "Partially update resource", "No*", "No", "PATCH /products/1"],
+                ["DELETE", "Remove resource", "Yes", "No", "DELETE /products/1"],
+              ],
+            },
+          },
+          {
+            title: "Online Store Example",
+            content: [
+              "GET /products → View all products (safe, idempotent)",
+              "POST /products → Add a new product (creates new resource each time)",
+              "PUT /products/1 → Replace product #1 entirely",
+              "PATCH /products/1 → Update only the price of product #1",
+              "DELETE /products/1 → Remove product #1",
+            ],
+          },
+          {
+            title: "Safe vs Idempotent",
+            content: [
+              "Safe: The operation does NOT modify server state. Only GET and HEAD are safe.",
+              "Idempotent: Multiple identical requests have the same effect as one. GET, PUT, DELETE are idempotent.",
+              "A safe method is always idempotent, but an idempotent method is not always safe (e.g., DELETE).",
+            ],
+          },
+        ],
+      },
+      {
+        heading: "Resource Identification & URI Design",
+        color: "pink",
+        content: [
+          "In REST, a Resource is any object or data — Student, Course, Product, Order.",
+          "Resources are identified by URIs (Uniform Resource Identifiers).",
+          "Resources should be nouns, not verbs — the HTTP method expresses the action.",
+        ],
+        subsections: [
+          {
+            title: "URI Design Rules",
+            content: [
+              "Use nouns, not verbs — /students not /getStudents.",
+              "Use plural form — /students not /student.",
+              "Use hierarchical structure for relationships — /students/10/courses.",
+              "Use lowercase and hyphens — /blog-posts not /BlogPosts.",
+              "Never use trailing slashes — /students not /students/.",
+            ],
+          },
+          {
+            title: "Good vs Bad URI Design",
+            table: {
+              headers: ["Bad URI ❌", "Good URI ✅", "Reason"],
+              rows: [
+                ["/createStudent", "POST /students", "Verb in URI — use HTTP method instead"],
+                ["/deleteStudent", "DELETE /students/1", "Action belongs to HTTP method"],
+                ["/updateStudent", "PUT /students/1", "Use PUT/PATCH for updates"],
+                ["/getStudentList", "GET /students", "GET is implied — noun only"],
+                ["/student", "GET /students", "Use plural form"],
+              ],
+            },
+          },
+          {
+            title: "University REST API — Full Example",
+            code: `// Students resource
+GET    /students          → Get all students
+GET    /students/:id      → Get student by ID
+POST   /students          → Create new student
+PUT    /students/:id      → Update student (full replace)
+PATCH  /students/:id      → Update student (partial)
+DELETE /students/:id      → Delete student
+
+// Nested resources (relationships)
+GET    /students/:id/courses     → Get courses for a student
+POST   /students/:id/courses     → Enroll student in a course
+DELETE /students/:id/courses/:cid → Unenroll from a course
+
+// Query parameters for filtering
+GET /students?department=CS&year=2
+GET /students?page=1&limit=20`,
+          },
+          {
+            title: "Library System REST API Design",
+            table: {
+              headers: ["Operation", "Method", "URI"],
+              rows: [
+                ["Get all books", "GET", "/books"],
+                ["Get book by ID", "GET", "/books/:id"],
+                ["Add new book", "POST", "/books"],
+                ["Update book", "PUT", "/books/:id"],
+                ["Delete book", "DELETE", "/books/:id"],
+                ["Get book's reviews", "GET", "/books/:id/reviews"],
+                ["Add review", "POST", "/books/:id/reviews"],
+              ],
+            },
+          },
+        ],
+      },
+    ],
+    quiz: [
+      { q: "What does MVC stand for and what is the role of each layer?", a: "Model-View-Controller. Model handles data, View displays data to users, Controller controls logic and flow between Model and View." },
+      { q: "What is scaffolding in web development?", a: "Scaffolding is the automatic generation of CRUD views (List, Create, Edit, Delete) based on a model definition. It saves time and reduces manual coding." },
+      { q: "What is Bootstrap and what problem does it solve?", a: "Bootstrap is a front-end CSS framework that provides a responsive grid system, pre-built components, and consistent styling — eliminating the need to write CSS from scratch." },
+      { q: "What is Bootstrap's grid system based on?", a: "A 12-column layout. Columns can be combined: 6+6 = half width, 4+4+4 = thirds, 12 = full width. Responsive breakpoints (sm, md, lg, xl) control layout at different screen sizes." },
+      { q: "What does REST stand for and who introduced it?", a: "Representational State Transfer. Introduced by Roy Fielding in his doctoral dissertation in 2000." },
+      { q: "What is statelessness in REST and why is it important?", a: "Each request must contain all necessary information — the server stores no session state between requests. This enables scalability (any server can handle any request) and reliability." },
+      { q: "What is idempotency? Which HTTP methods are idempotent?", a: "An operation is idempotent if performing it multiple times gives the same result. GET, PUT, and DELETE are idempotent. POST is NOT — each call creates a new resource." },
+      { q: "What is the difference between a 'safe' and an 'idempotent' HTTP method?", a: "Safe: does not modify server state (only GET/HEAD). Idempotent: multiple identical requests have the same effect as one (GET, PUT, DELETE). All safe methods are idempotent, but not vice versa." },
+      { q: "Why should REST URIs use nouns instead of verbs?", a: "Because the HTTP method (GET, POST, PUT, DELETE) already expresses the action. Using verbs in URIs is redundant and breaks the uniform interface constraint. Use /students not /getStudents." },
+      { q: "Design a REST API for an Online Food Ordering System with at least 3 resources.", a: "Resources: /restaurants, /menus, /orders. Examples: GET /restaurants, POST /orders, GET /orders/:id, PUT /orders/:id, DELETE /orders/:id, GET /restaurants/:id/menus, POST /restaurants/:id/menus." },
+    ],
+  },
+  {
     id: 7,
     title: "Designing REST API",
     topic: "REST API Design Using Case Study",

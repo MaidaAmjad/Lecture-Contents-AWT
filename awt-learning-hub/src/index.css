@@ -719,3 +719,132 @@ tr:hover td { background: #f0f1ff; }
     font-size: 1.4rem;
   }
 }
+
+/* ── Interactive Section Color Themes ── */
+:root {
+  --color-purple: #7c3aed;
+  --color-purple-bg: #f5f3ff;
+  --color-purple-border: #ddd6fe;
+  --color-blue: #2563eb;
+  --color-blue-bg: #eff6ff;
+  --color-blue-border: #bfdbfe;
+  --color-green: #059669;
+  --color-green-bg: #ecfdf5;
+  --color-green-border: #a7f3d0;
+  --color-orange: #d97706;
+  --color-orange-bg: #fffbeb;
+  --color-orange-border: #fde68a;
+  --color-pink: #db2777;
+  --color-pink-bg: #fdf2f8;
+  --color-pink-border: #fbcfe8;
+  --color-teal: #0d9488;
+  --color-teal-bg: #f0fdfa;
+  --color-teal-border: #99f6e4;
+}
+
+/* Section color variants */
+.lecture-section[data-color="purple"] {
+  border-color: var(--color-purple-border);
+  background: var(--color-purple-bg);
+}
+.lecture-section[data-color="purple"] .section-heading {
+  color: var(--color-purple);
+  border-bottom-color: var(--color-purple-border);
+}
+.lecture-section[data-color="purple"] .content-list li::before { color: var(--color-purple); }
+.lecture-section[data-color="purple"] .subsection { border-color: var(--color-purple-border); background: white; }
+.lecture-section[data-color="purple"] .subsection-title { color: var(--color-purple); }
+.lecture-section[data-color="purple"]:hover { box-shadow: 0 6px 24px rgba(124,58,237,0.14) !important; }
+
+.lecture-section[data-color="blue"] {
+  border-color: var(--color-blue-border);
+  background: var(--color-blue-bg);
+}
+.lecture-section[data-color="blue"] .section-heading {
+  color: var(--color-blue);
+  border-bottom-color: var(--color-blue-border);
+}
+.lecture-section[data-color="blue"] .content-list li::before { color: var(--color-blue); }
+.lecture-section[data-color="blue"] .subsection { border-color: var(--color-blue-border); background: white; }
+.lecture-section[data-color="blue"] .subsection-title { color: var(--color-blue); }
+.lecture-section[data-color="blue"]:hover { box-shadow: 0 6px 24px rgba(37,99,235,0.14) !important; }
+
+.lecture-section[data-color="green"] {
+  border-color: var(--color-green-border);
+  background: var(--color-green-bg);
+}
+.lecture-section[data-color="green"] .section-heading {
+  color: var(--color-green);
+  border-bottom-color: var(--color-green-border);
+}
+.lecture-section[data-color="green"] .content-list li::before { color: var(--color-green); }
+.lecture-section[data-color="green"] .subsection { border-color: var(--color-green-border); background: white; }
+.lecture-section[data-color="green"] .subsection-title { color: var(--color-green); }
+.lecture-section[data-color="green"]:hover { box-shadow: 0 6px 24px rgba(5,150,105,0.14) !important; }
+
+.lecture-section[data-color="orange"] {
+  border-color: var(--color-orange-border);
+  background: var(--color-orange-bg);
+}
+.lecture-section[data-color="orange"] .section-heading {
+  color: var(--color-orange);
+  border-bottom-color: var(--color-orange-border);
+}
+.lecture-section[data-color="orange"] .content-list li::before { color: var(--color-orange); }
+.lecture-section[data-color="orange"] .subsection { border-color: var(--color-orange-border); background: white; }
+.lecture-section[data-color="orange"] .subsection-title { color: var(--color-orange); }
+.lecture-section[data-color="orange"]:hover { box-shadow: 0 6px 24px rgba(217,119,6,0.14) !important; }
+
+.lecture-section[data-color="pink"] {
+  border-color: var(--color-pink-border);
+  background: var(--color-pink-bg);
+}
+.lecture-section[data-color="pink"] .section-heading {
+  color: var(--color-pink);
+  border-bottom-color: var(--color-pink-border);
+}
+.lecture-section[data-color="pink"] .content-list li::before { color: var(--color-pink); }
+.lecture-section[data-color="pink"] .subsection { border-color: var(--color-pink-border); background: white; }
+.lecture-section[data-color="pink"] .subsection-title { color: var(--color-pink); }
+.lecture-section[data-color="pink"]:hover { box-shadow: 0 6px 24px rgba(219,39,119,0.14) !important; }
+
+/* ── Lecture card color accent (top bar) ── */
+.lecture-card[data-color="teal"]::before {
+  background: linear-gradient(90deg, var(--color-teal), #2dd4bf);
+}
+.lecture-card[data-color="teal"] .card-num { color: var(--color-teal); }
+.lecture-card[data-color="teal"]:hover {
+  border-color: var(--color-teal-border) !important;
+  box-shadow: 0 16px 48px rgba(13,148,136,0.22), 0 4px 12px rgba(0,0,0,0.08) !important;
+}
+
+/* ── Subsection interactive hover with color awareness ── */
+.lecture-section[data-color] .subsection {
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease !important;
+  cursor: default;
+}
+.lecture-section[data-color="purple"] .subsection:hover { border-color: var(--color-purple) !important; transform: translateX(4px) !important; }
+.lecture-section[data-color="blue"]   .subsection:hover { border-color: var(--color-blue)   !important; transform: translateX(4px) !important; }
+.lecture-section[data-color="green"]  .subsection:hover { border-color: var(--color-green)  !important; transform: translateX(4px) !important; }
+.lecture-section[data-color="orange"] .subsection:hover { border-color: var(--color-orange) !important; transform: translateX(4px) !important; }
+.lecture-section[data-color="pink"]   .subsection:hover { border-color: var(--color-pink)   !important; transform: translateX(4px) !important; }
+
+/* ── Table header color per section ── */
+.lecture-section[data-color="purple"] th { background: var(--color-purple); }
+.lecture-section[data-color="blue"]   th { background: var(--color-blue); }
+.lecture-section[data-color="green"]  th { background: var(--color-green); }
+.lecture-section[data-color="orange"] th { background: var(--color-orange); }
+.lecture-section[data-color="pink"]   th { background: var(--color-pink); }
+
+/* ── Quiz section color accent for lecture 6 ── */
+.quiz-section[data-color="teal"] {
+  border-color: var(--color-teal-border);
+}
+.quiz-section[data-color="teal"] .quiz-title { color: var(--color-teal); }
+.quiz-section[data-color="teal"] .quiz-item:hover {
+  border-color: var(--color-teal) !important;
+}
+.quiz-section[data-color="teal"] .quiz-question:hover {
+  background: var(--color-teal-bg) !important;
+  color: var(--color-teal) !important;
+}
