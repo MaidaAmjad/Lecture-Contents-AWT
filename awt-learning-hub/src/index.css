@@ -54,7 +54,14 @@ body {
   overflow-y: auto;
   z-index: 100;
   transition: transform 0.3s ease;
-  transform: translateX(0);
+  transform: translateX(-100%);
+}
+
+/* Show sidebar on desktop always */
+@media (min-width: 769px) {
+  .sidebar {
+    transform: translateX(0) !important;
+  }
 }
 
 .sidebar-header {
@@ -228,10 +235,16 @@ body {
 
 /* Main content */
 .main-content {
-  margin-left: 280px;
+  margin-left: 0;
   flex: 1;
   min-height: 100vh;
   min-width: 0;
+}
+
+@media (min-width: 769px) {
+  .main-content {
+    margin-left: 280px;
+  }
 }
 
 /* Top bar */
@@ -713,13 +726,6 @@ tr:hover td { background: #f0f1ff; }
 
 /* Responsive */
 @media (max-width: 768px) {
-  .sidebar {
-    transform: translateX(-100%);
-    width: 88vw;
-    max-width: 300px;
-    box-shadow: 4px 0 24px rgba(0,0,0,0.15);
-  }
-
   .sidebar.open {
     transform: translateX(0);
   }
