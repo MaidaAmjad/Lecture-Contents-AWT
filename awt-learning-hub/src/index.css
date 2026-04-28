@@ -27,6 +27,7 @@ body {
   background: var(--bg);
   color: var(--text);
   line-height: 1.6;
+  overflow-x: hidden;
 }
 
 /* Scrollbar */
@@ -52,22 +53,31 @@ body {
   left: 0;
   height: 100vh;
   overflow-y: auto;
-  z-index: 100;
+  z-index: 1000;
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  /* Hidden by default on ALL screen sizes */
   transform: translateX(-100%);
 }
 
-/* Desktop: always visible */
+/* Desktop (≥769px): always show */
 @media (min-width: 769px) {
   .sidebar {
     transform: translateX(0);
+    z-index: 100;
   }
 }
 
-/* Mobile: slide in when open */
+/* Mobile (<769px): show only when .open is added */
 @media (max-width: 768px) {
+  .sidebar {
+    transform: translateX(-100%) !important;
+    width: 85vw;
+    max-width: 300px;
+    box-shadow: 8px 0 32px rgba(0,0,0,0.2);
+    z-index: 1000;
+  }
   .sidebar.open {
-    transform: translateX(0);
+    transform: translateX(0) !important;
   }
 }
 
@@ -727,8 +737,10 @@ tr:hover td { background: #f0f1ff; }
   display: none;
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.4);
-  z-index: 99;
+  background: rgba(0,0,0,0.5);
+  z-index: 999;
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
 }
 
 /* Responsive */
